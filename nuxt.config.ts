@@ -16,6 +16,11 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  runtimeConfig: {
+    public: {
+      publizApiUrl: process.env.VITE_PUBLIZ_API_URL,
+    },
+  },
   shadcn: {
     prefix: "",
     componentDir: "./components/ui",
