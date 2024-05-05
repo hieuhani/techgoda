@@ -1,12 +1,14 @@
 <template>
-  <div class="bg-white py-4 border-b">
+  <div class="bg-white py-2 border-b">
     <Container class="flex items-center">
       <div class="flex justify-start mr-4">
         <NuxtLink to="/" class="text-primary flex items-center">
           <span class="text-2xl font-medium">Techgoda</span>
         </NuxtLink>
       </div>
-      <ul class="flex space-x-1">
+      <ul
+        class="flex space-x-1 fixed py-1 lg:py-0 bottom-0 inset-x-0 bg-white lg:static shadow lg:shadow-none"
+      >
         <li v-for="item in menuItems" :key="item.path">
           <NuxtLink
             :to="item.path"
@@ -83,6 +85,10 @@ const menuItems = [
   {
     name: "Devfeeds",
     path: "/devfeeds",
+  },
+  {
+    name: "Jobs",
+    path: "/jobs",
   },
 ];
 </script>
