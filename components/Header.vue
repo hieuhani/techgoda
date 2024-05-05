@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white py-4 border-b">
-    <div class="flex items-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <Container class="flex items-center">
       <div class="flex justify-start mr-4">
         <NuxtLink to="/" class="text-primary flex items-center">
           <span class="text-2xl font-medium">Techgoda</span>
@@ -62,7 +62,7 @@
           </Dialog>
         </template>
       </div>
-    </div>
+    </Container>
   </div>
 </template>
 

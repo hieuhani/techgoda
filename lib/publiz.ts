@@ -126,6 +126,13 @@ export type Post = {
   authorId: number;
 };
 
+type GetTaxonomiesPostsQuery = {
+  before?: string;
+  after?: string;
+  pageSize?: number;
+  tag?: string;
+};
+
 const publizFetch = $fetch.create({
   baseURL: import.meta.env.VITE_PUBLIZ_API_URL,
   async onRequest(ctx) {
@@ -244,4 +251,20 @@ export const updateMyPost = (id: number, input: UpdatePostInput) => {
     body: input,
     method: "PUT",
   });
+};
+
+export const useGetTaxonomyPosts = (
+  taxonomy: string | number,
+  query: GetTaxonomiesPostsQuery | Ref<GetTaxonomiesPostsQuery>
+) => {
+  return usePublizFetch<BaseResponse<Post[]>>(
+    `api/v1/taxonomies/${taxonomy}/posts`,
+    {
+      params: query,
+    }
+  );
+};
+
+export const useGetPost = (id: number) => {
+  return usePublizFetch<BaseResponse<Post>>(`api/v1/posts/${id}`);
 };
