@@ -21,4 +21,15 @@ const id = idString ? decodeId(idString) : 0;
 
 const { data } = useGetPost(id);
 const post = computed(() => data.value?.data);
+
+useSeoMeta({
+  title: post.value?.title || "Techgoda",
+  ogTitle: post.value?.title || "Techgoda",
+  description:
+    post.value?.metadata?.excerpt ||
+    "Techgoda is a publishing platform for developers.",
+  ogDescription:
+    post.value?.metadata?.excerpt ||
+    "Techgoda is a publishing platform for developers.",
+});
 </script>
