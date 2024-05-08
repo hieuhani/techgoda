@@ -42,6 +42,12 @@
         </li>
       </ul>
       <div class="flex space-x-2 ml-auto">
+        <a
+          href="https://github.com/hieuhani/techgoda"
+          class="flex justify-center items-center px-2"
+        >
+          <Github class="w-6 h-6" />
+        </a>
         <template v-if="$currentUser">
           <UserNav :user="$currentUser" :my-organizations="$myOrganizations" />
         </template>
@@ -83,6 +89,7 @@
 </template>
 
 <script setup lang="ts">
+import { Github } from "lucide-vue-next";
 import { buttonVariants } from "./ui/button";
 const { $currentUser, $myOrganizations } = useNuxtApp();
 
