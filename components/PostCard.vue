@@ -15,13 +15,13 @@
         </time>
       </div>
     </div>
-    <NuxtLink :to="`/${slug}`" class="block">
+    <NuxtLink :to="`/thread/${slug}`" class="block">
       <h3 class="font-medium text-lg mb-1">{{ post.title }}</h3>
       <p class="text-sm text-gray-500 mb-2">{{ post.metadata?.excerpt }}</p>
       <div v-if="post.metadata?.featuredImage" class="mb-2">
         <img
           class="w-full h-full object-cover rounded-lg"
-          :src="post.metadata?.featuredImage.src"
+          :src="getGoogleImage(post.metadata?.featuredImage.src, 'w1000')"
           alt="post image"
         />
       </div>
@@ -33,6 +33,7 @@
 import type { Post } from "~/lib/publiz";
 import { slugify } from "~/lib/slugify";
 import { encodeId } from "~/lib/id";
+import { getGoogleImage } from "@/lib/google-image";
 
 const props = defineProps<{ post: Post }>();
 const slug = computed(

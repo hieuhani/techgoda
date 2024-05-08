@@ -1,5 +1,7 @@
 import { defu } from "defu";
 import type { UseFetchOptions } from "nuxt/app";
+import { slugify } from "./slugify";
+import { encodeId } from "./id";
 
 export type BaseResponse<T> = {
   data: T;
@@ -265,6 +267,28 @@ export const useGetTaxonomyPosts = (
   );
 };
 
+type GetCollectionPostsQuery = {
+  before?: string;
+  after?: string;
+  pageSize?: number;
+  tag?: string;
+};
+
+export const useGetCollectionPosts = (
+  collection: string | number,
+  query: GetCollectionPostsQuery | Ref<GetCollectionPostsQuery>
+) => {
+  return usePublizFetch<BaseResponse<Post[]>>(
+    `api/v1/collections/${collection}/posts`,
+    {
+      params: query,
+    }
+  );
+};
+
 export const useGetPost = (id: number) => {
   return usePublizFetch<BaseResponse<Post>>(`api/v1/posts/${id}`);
 };
+
+export const getPostPath = (post: Post) =>
+  `/thread/${slugify(post.title.toLowerCase())}-${encodeId(post.id)}`;

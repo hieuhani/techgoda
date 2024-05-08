@@ -23,7 +23,7 @@
     <div class="flex-1 space-y-4">
       <PostCard v-for="post in posts" :post="post" :key="post.id" />
     </div>
-    <div class="w-64"></div>
+    <div class="w-80"></div>
   </Container>
 </template>
 

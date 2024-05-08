@@ -27,7 +27,7 @@
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit">Đăng ký</Button>
+    <Button type="submit" :disabled="loading">Đăng ký</Button>
   </form>
 </template>
 
@@ -58,6 +58,7 @@ const formSchema = toTypedSchema(
       }
     )
 );
+const loading = ref(false);
 
 const form = useForm({
   validationSchema: formSchema,
@@ -65,6 +66,7 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {
+    loading.value = true;
     await createUserWithEmailAndPassword(auth, values.email, values.password);
     navigateTo("/");
   } catch (e: any) {
@@ -73,5 +75,6 @@ const onSubmit = form.handleSubmit(async (values) => {
       description: e.code,
     });
   }
+  loading.value = false;
 });
 </script>

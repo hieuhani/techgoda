@@ -11,10 +11,11 @@
     </DropdownMenuTrigger>
     <DropdownMenuContent class="w-56" align="end">
       <DropdownMenuGroup>
-        <!-- <DropdownMenuItem>
+        <DropdownMenuItem>
           <UserIcon class="mr-2 h-4 w-4" />
-          <span>Trang cá nhân</span>
+          <span>My profile</span>
         </DropdownMenuItem>
+        <!-- 
         <DropdownMenuItem>
           <Settings class="mr-2 h-4 w-4" />
           <span>Cài đặt</span>
@@ -72,7 +73,7 @@ import {
   User as UserIcon,
   Users,
 } from "lucide-vue-next";
-import { type MyOrganization, type User } from "~/lib/publiz";
+import type { MyOrganization, User } from "~/lib/publiz";
 import { useBuildTenantUrl } from "~/lib/utils";
 
 interface Props {
