@@ -13,7 +13,7 @@
                 :src="
                   getGoogleImage(
                     featuredPosts.topPost.metadata?.featuredImage.src,
-                    'w1000'
+                    'w600'
                   )
                 "
                 alt="post image"
@@ -35,7 +35,7 @@
                 :src="
                   getGoogleImage(
                     featuredPosts.secondPost.metadata?.featuredImage.src,
-                    'w1000'
+                    'w600'
                   )
                 "
                 alt="post image"
@@ -59,7 +59,7 @@
             <div v-if="post.metadata?.featuredImage" class="mb-2">
               <img
                 class="w-full object-cover rounded-lg aspect-[3/2]"
-                :src="getGoogleImage(post.metadata?.featuredImage.src, 'w1000')"
+                :src="getGoogleImage(post.metadata?.featuredImage.src, 'w600')"
                 alt="post image"
               />
             </div>
@@ -69,7 +69,7 @@
           </NuxtLink>
         </div>
       </div>
-      <div class="col-span-4">
+      <div class="col-span-12 lg:col-span-4">
         <ul
           class="space-y-4 border-l border-b rounded-bl-2xl border-dotted pl-5 pb-5 border-primary"
         >
@@ -90,7 +90,7 @@
                 <img
                   class="w-full object-cover rounded-lg aspect-[3/2]"
                   :src="
-                    getGoogleImage(post.metadata?.featuredImage.src, 'w1000')
+                    getGoogleImage(post.metadata?.featuredImage.src, 'w200')
                   "
                   alt="post image"
                 />

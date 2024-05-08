@@ -21,7 +21,7 @@
         </NuxtLink>
       </div>
       <ul
-        class="flex space-x-1 fixed py-1 lg:py-0 bottom-0 inset-x-0 bg-white lg:static shadow lg:shadow-none"
+        class="flex lg:space-x-1 fixed py-1 lg:py-0 bottom-0 inset-x-0 bg-white lg:static shadow lg:shadow-none z-10 justify-center"
       >
         <li v-for="item in menuItems" :key="item.path">
           <NuxtLink
@@ -63,7 +63,7 @@
               <SignInForm />
             </DialogContent>
           </Dialog>
-          <Dialog>
+          <!-- <Dialog>
             <DialogTrigger>
               <a href="/register" @click.prevent="" :class="buttonVariants()">
                 Sign up
@@ -75,7 +75,7 @@
               </DialogHeader>
               <RegisterForm />
             </DialogContent>
-          </Dialog>
+          </Dialog> -->
         </template>
       </div>
     </Container>
