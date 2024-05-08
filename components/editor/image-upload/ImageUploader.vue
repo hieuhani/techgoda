@@ -4,7 +4,7 @@
       for="selectFile"
       class="w-full min-h-28 border border-dashed flex items-center justify-center cursor-pointer rounded-md"
     >
-      Chọn ảnh
+      Select image
     </label>
     <input
       id="selectFile"

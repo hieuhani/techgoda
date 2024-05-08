@@ -46,6 +46,7 @@
     "tailwind-merge": "^2.3.0",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
+    "vue-cropperjs": "^5.0.0",
     "vue-router": "^4.3.0",
     "zod": "^3.23.6"
   },

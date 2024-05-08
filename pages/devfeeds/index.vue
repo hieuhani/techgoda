@@ -47,11 +47,7 @@
       <div class="bg-white rounded-lg px-3 py-3">
         <div class="flex space-x-3 mb-3">
           <Avatar class="h-10 w-10 text-md">
-            <AvatarImage
-              src="https://avatars.githubusercontent.com/u/4966345?v=4"
-              alt=""
-            />
-            <AvatarFallback>U</AvatarFallback>
+            <AvatarImage src="/hi.webp" alt="" />
           </Avatar>
           <button
             class="bg-gray-100 flex-1 text-left px-3 rounded-full text-gray-600"

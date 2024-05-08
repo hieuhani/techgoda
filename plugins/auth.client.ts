@@ -26,6 +26,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     provide: {
       currentUser,
       myOrganizations,
+      refreshGetMyProfile,
     },
   };
 });

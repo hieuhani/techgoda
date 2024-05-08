@@ -2,11 +2,7 @@
   <div class="bg-white px-4 py-4 rounded-lg">
     <div class="flex items-center mb-3">
       <Avatar class="h-10 w-10 text-md">
-        <AvatarImage
-          src="https://avatars.githubusercontent.com/u/4966345?v=4"
-          alt=""
-        />
-        <AvatarFallback>U</AvatarFallback>
+        <AvatarImage src="/hi.webp" alt="" />
       </Avatar>
       <div class="ml-2">
         <h3 class="leading-none">Hieu Tran</h3>

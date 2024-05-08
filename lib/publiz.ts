@@ -18,6 +18,7 @@ export type User = {
   displayName: string;
   avatarUrl?: string;
   coverUrl?: string;
+  metadata: any;
 };
 
 export type Organization = {
@@ -288,6 +289,20 @@ export const useGetCollectionPosts = (
 
 export const useGetPost = (id: number) => {
   return usePublizFetch<BaseResponse<Post>>(`api/v1/posts/${id}`);
+};
+
+export const useGetUser = (id: number | string) => {
+  return usePublizFetch<BaseResponse<Post>>(`api/v1/users/${id}`);
+};
+
+export const uploadMyProfileImage = (formData: FormData) => {
+  return publizFetch<BaseResponse<PublizFile>>(
+    "api/v1/users/my_profile/image",
+    {
+      body: formData,
+      method: "PATCH",
+    }
+  );
 };
 
 export const getPostPath = (post: Post) =>

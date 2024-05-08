@@ -3,17 +3,20 @@
     <DropdownMenuTrigger>
       <Avatar>
         <AvatarImage
-          src="https://avatars.githubusercontent.com/u/4966345?v=4"
+          :src="
+            user.metadata?.avatar?.src ? user.metadata.avatar.src : '/hi.webp'
+          "
           alt=""
         />
-        <AvatarFallback>GP</AvatarFallback>
       </Avatar>
     </DropdownMenuTrigger>
     <DropdownMenuContent class="w-56" align="end">
       <DropdownMenuGroup>
-        <DropdownMenuItem>
-          <UserIcon class="mr-2 h-4 w-4" />
-          <span>My profile</span>
+        <DropdownMenuItem as-child>
+          <NuxtLink :to="`/user/${encodeId(user.id)}`">
+            <UserIcon class="mr-2 h-4 w-4" />
+            <span>My profile</span>
+          </NuxtLink>
         </DropdownMenuItem>
         <!-- 
         <DropdownMenuItem>
@@ -75,6 +78,7 @@ import {
 } from "lucide-vue-next";
 import type { MyOrganization, User } from "~/lib/publiz";
 import { useBuildTenantUrl } from "~/lib/utils";
+import { encodeId } from "~/lib/id";
 
 interface Props {
   user: User;

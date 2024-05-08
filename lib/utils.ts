@@ -13,10 +13,3 @@ export const useBuildTenantUrl = (tenant: string) => {
   }
   return `${protocol}//${tenant ? `${tenant}.` : ""}${host}`;
 };
-
-export const getAvatarFromDescription = (description: string) => {
-  if (description.includes("cá")) {
-    return "/static/koi-fish.webp";
-  }
-  return "/static/xp-bliss.jpg";
-};
