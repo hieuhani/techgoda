@@ -59,6 +59,7 @@
         <CarouselNext class="right-2" />
       </Carousel>
       <NewFeedPost v-if="$currentUser" />
+      <PostCard v-for="post in devfeedPosts" :post="post" :key="post.id" />
     </div>
     <div class="col-span-12 lg:col-span-4">
       <div>Side bar</div>
@@ -76,5 +77,11 @@ const { data: dataPosts } = useGetMetaSchemaPosts("story:1", {
   pageSize: 32,
 });
 
+const { data: dataDevFeedPosts } = useGetMetaSchemaPosts("devfeed:1", {
+  pageSize: 32,
+});
+
 const storyPosts = computed(() => dataPosts?.value?.data || []);
+
+const devfeedPosts = computed(() => dataDevFeedPosts?.value?.data || []);
 </script>

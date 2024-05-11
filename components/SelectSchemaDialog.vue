@@ -1,6 +1,6 @@
 <template>
   <Dialog :open="!modelValue">
-    <DialogContent>
+    <DialogContent hide-close>
       <DialogHeader>
         <DialogTitle>Select post schema</DialogTitle>
       </DialogHeader>
@@ -47,7 +47,11 @@ const { data: dataMetaSchemas } = usePublizFetch<BaseResponse<MetaSchema[]>>(
     : "api/v1/meta_schemas"
 );
 
-const metaSchemas = computed(() => dataMetaSchemas.value?.data || []);
+const metaSchemas = computed(() =>
+  (dataMetaSchemas.value?.data || []).filter(
+    (schema) => schema.target === "post"
+  )
+);
 
 watchEffect(() => {
   if (

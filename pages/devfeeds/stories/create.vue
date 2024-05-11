@@ -1,5 +1,6 @@
 <template>
   <Container class="mt-2 max-w-3xl gap-4 grid grid-cols-12">
+    <FreezeLoading v-if="isPosting" />
     <div class="col-span-12 lg:col-span-7">
       <div class="max-w-96 aspect-[2/3] mx-auto">
         <canvas
