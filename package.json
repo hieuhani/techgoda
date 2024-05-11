@@ -34,6 +34,7 @@
     "dayjs-nuxt": "^2.1.9",
     "embla-carousel": "^8.0.2",
     "embla-carousel-vue": "^8.0.2",
+    "fabric": "beta",
     "firebase": "^10.11.1",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.0",

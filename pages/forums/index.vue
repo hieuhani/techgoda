@@ -1,5 +1,5 @@
 <template>
-  <Container class="lg:flex space-x-3 pt-3">
+  <Container class="lg:flex lg:space-x-3 pt-3">
     <div class="lg:w-48">
       <ul
         class="-translate-x-1 flex flex-row lg:flex-col overflow-x-auto flex-nowrap"

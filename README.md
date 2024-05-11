@@ -24,6 +24,7 @@ The working website was built using:
 - [vuefire](https://vuefire.vuejs.org/nuxt/auth.html) for authentication
 - [Vercel](http://vercel.com/) for deployment
 - [Bun](https://bun.sh/) for development
+- [FabricJS](http://fabricjs.com/) for story creator
 
 ## Contributing
 
