@@ -5,8 +5,8 @@
   >
     <div class="overflow-hidden h-44 relative">
       <img
-        v-if="$currentUser.metadata?.avatar?.src"
-        :src="$currentUser.metadata?.avatar?.src"
+        v-if="$currentUser?.metadata?.avatar?.src"
+        :src="$currentUser?.metadata?.avatar?.src"
         class="hover:scale-110 transition-transform duration-300"
       />
     </div>

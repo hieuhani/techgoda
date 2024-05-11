@@ -1,13 +1,20 @@
 <template>
   <Container class="mt-2 max-w-3xl gap-4 grid grid-cols-12">
-    <div class="col-span-7">
-      <div class="max-w-96 aspect-[2/3] mx-auto rounded-lg overflow-hidden">
-        <canvas ref="canvasRef" class="w-full h-full touch-none" />
+    <div class="col-span-12 lg:col-span-7">
+      <div class="max-w-96 aspect-[2/3] mx-auto">
+        <canvas
+          ref="canvasRef"
+          class="w-full h-full touch-none rounded-lg overflow-hidden"
+        />
       </div>
     </div>
-    <div class="col-span-5 space-y-3">
-      <Button class="w-full">Post story</Button>
-      <div class="bg-white px-3 py-3 rounded space-y-3">
+    <div class="col-span-12 lg:col-span-5 space-y-3 flex flex-col">
+      <div class="order-2 lg:order-1">
+        <AskToLogin>
+          <Button class="w-full" @click="postStory">Post story</Button>
+        </AskToLogin>
+      </div>
+      <div class="bg-white px-3 py-3 rounded space-y-3 order-1 lg:order-2">
         <div>
           <h3 class="mb-3 font-medium">Texts</h3>
           <div>
@@ -171,8 +178,19 @@ import {
   AlignRight,
   Palette,
 } from "lucide-vue-next";
+import { useToast } from "~/components/ui/toast";
+import {
+  createMyPost,
+  updateMyPost,
+  uploadMyFile,
+  useGetMetaSchema,
+} from "~/lib/publiz";
+
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
+const { data: dataSchema } = await useGetMetaSchema("story:1");
+const storySchema = computed(() => dataSchema.value?.data);
+const { toast } = useToast();
 const colors = [
   "#020617",
   "#b91c1c",
@@ -201,7 +219,7 @@ const onSelectionCreated = (e: any) => {
     activeObject.value = null;
   }
 };
-
+const isPosting = ref(false);
 const onSelectionCleared = (e: any) => {
   activeObject.value = null;
 };
@@ -299,6 +317,73 @@ const updateTextObject = (key: string, value: any) => {
       aObject.set(key, value);
       canvas.renderAll();
     }
+  }
+};
+
+const postStory = async () => {
+  if (canvas) {
+    canvas.discardActiveObject();
+    isPosting.value = true;
+    try {
+      const body = {
+        title: "Story",
+        content: "",
+        status: "DRAFT" as const,
+      };
+      const { data: initialPost } = await createMyPost(body);
+
+      const dataUrl = canvas.toDataURL({
+        format: "png",
+        multiplier: 1,
+        quality: 1,
+      });
+      const binary = atob(dataUrl.split(",")[1]);
+      const array = [];
+      for (let i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      const blob = new Blob([new Uint8Array(array)], { type: "image/png" });
+      const formData = new FormData();
+      formData.append(
+        "file",
+        new File([blob], `story.png`, {
+          type: blob.type,
+        })
+      );
+      formData.append("modelName", "post");
+      formData.append("modelId", String(initialPost.id));
+      formData.append(
+        "metadata",
+        JSON.stringify({
+          width: canvas.width,
+          height: canvas.height,
+        })
+      );
+
+      const { data: dataFile } = await uploadMyFile(formData);
+
+      await updateMyPost(initialPost.id, {
+        ...body,
+        status: "PUBLISHED" as const,
+        metadata: {
+          featuredImage: {
+            src: dataFile.fileUrl,
+          },
+        },
+        metaSchemaId: storySchema.value?.id,
+      });
+      navigateTo("/devfeeds");
+      toast({
+        title: "Story post created successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error happened when creating post",
+      });
+    }
+
+    isPosting.value = false;
   }
 };
 </script>

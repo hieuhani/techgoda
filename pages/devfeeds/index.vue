@@ -31,15 +31,19 @@
     <div class="col-span-12 lg:col-span-6 space-y-4">
       <Carousel class="relative">
         <CarouselContent>
-          <CarouselItem v-if="$currentUser" class="basis-auto">
+          <CarouselItem class="basis-auto">
             <NewStoryButton />
           </CarouselItem>
-          <CarouselItem v-for="i in 5" :key="i" class="basis-auto">
+          <CarouselItem
+            v-for="story in storyPosts"
+            :key="story.id"
+            class="basis-auto"
+          >
             <button
               class="w-36 bg-gray-100 rounded-lg overflow-hidden h-full relative"
             >
               <img
-                src="https://images.unsplash.com/photo-1714675520565-5cab94e5046b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                :src="getGoogleImage(story.metadata?.featuredImage.src, 'w200')"
                 class="hover:scale-110 transition-transform duration-300 object-cover h-full w-full"
               />
               <div class="absolute bottom-0 left-0 right-0 text-white py-2">
@@ -64,6 +68,13 @@
 
 <script setup lang="ts">
 import { Sparkle, Users, Telescope, UserSearch } from "lucide-vue-next";
+import { useGetMetaSchemaPosts } from "~/lib/publiz";
+import { getGoogleImage } from "@/lib/google-image";
 
 const { $currentUser } = useNuxtApp();
+const { data: dataPosts } = useGetMetaSchemaPosts("story:1", {
+  pageSize: 32,
+});
+
+const storyPosts = computed(() => dataPosts?.value?.data || []);
 </script>

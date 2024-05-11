@@ -7,7 +7,7 @@
       <button
         class="bg-gray-100 flex-1 text-left px-3 rounded-full text-gray-600"
       >
-        What's on your mind, Hieu?
+        What's on your mind?
       </button>
     </div>
     <div class="flex justify-around ml-12">
@@ -34,6 +34,4 @@
 
 <script setup lang="ts">
 import { Image, Vote, CalendarDays, MapPin } from "lucide-vue-next";
-
-const { $currentUser } = useNuxtApp();
 </script>

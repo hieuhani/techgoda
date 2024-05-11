@@ -251,12 +251,12 @@ const onSubmit = async () => {
     }
 
     toast({
-      title: `Đã ${props.post ? "sửa" : "tạo"} bài viết thành công`,
+      title: `Post ${props.post ? "edited" : "created"} successfully`,
     });
   } catch (error) {
     console.error(error);
     toast({
-      title: "Có lỗi xảy ra khi tạo bài viết",
+      title: "Error happened when creating post",
     });
   }
 

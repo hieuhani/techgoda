@@ -1,6 +1,7 @@
 <template>
   <Header />
   <slot />
+  <div class="h-16 lg:hidden" />
 </template>
 
 <script setup lang="ts">

@@ -215,6 +215,12 @@ export const uploadMyFile = (formData: FormData) => {
   });
 };
 
+export const useGetMetaSchema = async (identifier: string) => {
+  return usePublizFetch<BaseResponse<MetaSchema>>(
+    `api/v1/meta_schemas/${identifier}`
+  );
+};
+
 export const createOrganizationPost = (
   organizationId: number,
   input: CreatePostInput
@@ -307,3 +313,21 @@ export const uploadMyProfileImage = (formData: FormData) => {
 
 export const getPostPath = (post: Post) =>
   `/thread/${slugify(post.title.toLowerCase())}-${encodeId(post.id)}`;
+
+type GetMetaSchemaPostsQuery = {
+  before?: string;
+  after?: string;
+  pageSize?: number;
+};
+
+export const useGetMetaSchemaPosts = (
+  metaSchemaId: number | string,
+  query?: GetMetaSchemaPostsQuery | Ref<GetMetaSchemaPostsQuery>
+) => {
+  return usePublizFetch<BaseResponse<Post[]>>(
+    `api/v1/meta_schemas/${metaSchemaId}/posts`,
+    {
+      params: query,
+    }
+  );
+};
