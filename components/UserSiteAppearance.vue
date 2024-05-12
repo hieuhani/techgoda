@@ -75,9 +75,7 @@ const uploadType = ref("");
 const image = ref("");
 const loading = ref(false);
 const title = computed(() =>
-  uploadType.value === "avatar"
-    ? "Thay đổi hình đại diện"
-    : "Thay đổi hình cover"
+  uploadType.value === "avatar" ? "Change avatar" : "Change cover"
 );
 const onSelectFile = (e: Event, type: string) => {
   const target = e.target as HTMLInputElement;

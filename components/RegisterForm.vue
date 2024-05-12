@@ -11,7 +11,7 @@
     </FormField>
     <FormField v-slot="{ componentField }" name="password">
       <FormItem>
-        <FormLabel>Mật khẩu</FormLabel>
+        <FormLabel>Password</FormLabel>
         <FormControl>
           <Input type="password" v-bind="componentField" />
         </FormControl>
@@ -20,14 +20,14 @@
     </FormField>
     <FormField v-slot="{ componentField }" name="passwordConfirmation">
       <FormItem>
-        <FormLabel>Xác nhận mật khẩu</FormLabel>
+        <FormLabel>Confirm password</FormLabel>
         <FormControl>
           <Input type="password" v-bind="componentField" />
         </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit" :disabled="loading">Đăng ký</Button>
+    <Button type="submit" :disabled="loading">Register</Button>
   </form>
 </template>
 
@@ -53,7 +53,7 @@ const formSchema = toTypedSchema(
         return values.password === values.passwordConfirmation;
       },
       {
-        message: "Mật khẩu không khớp",
+        message: "Passwords do not match",
         path: ["passwordConfirmation"],
       }
     )
@@ -71,7 +71,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     navigateTo("/");
   } catch (e: any) {
     toast({
-      title: "Lỗi",
+      title: "Error",
       description: e.code,
     });
   }

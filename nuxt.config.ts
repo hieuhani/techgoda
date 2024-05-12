@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     "dayjs-nuxt",
     "nuxt-vuefire",
   ],
+  devServer: {
+    port: 8080,
+  },
   devtools: { enabled: true },
   postcss: {
     plugins: {

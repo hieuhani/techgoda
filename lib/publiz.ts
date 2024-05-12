@@ -106,6 +106,9 @@ export type PublizFile = {
 };
 
 export type UpdatePostInput = CreatePostInput;
+export type UpdateUserInput = {
+  displayName: string;
+};
 
 export type MyOrganization = Organization & {
   organizationRoleIds: number[];
@@ -127,6 +130,7 @@ export type Post = {
   contentJson: any;
   tags?: Tag[];
   authorId: number;
+  author?: Omit<User, "authId">;
 };
 
 type GetTaxonomiesPostsQuery = {
@@ -246,6 +250,13 @@ export const updateOrganizationPost = (
       method: "PUT",
     }
   );
+};
+
+export const updateMyProfile = (input: UpdateUserInput) => {
+  return publizFetch<BaseResponse<User>>("api/v1/users/my_profile", {
+    body: input,
+    method: "PUT",
+  });
 };
 
 export const createMyPost = (input: CreatePostInput) => {

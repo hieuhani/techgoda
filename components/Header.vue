@@ -69,7 +69,7 @@
               <SignInForm />
             </DialogContent>
           </Dialog>
-          <!-- <Dialog>
+          <Dialog>
             <DialogTrigger>
               <a href="/register" @click.prevent="" :class="buttonVariants()">
                 Sign up
@@ -81,7 +81,7 @@
               </DialogHeader>
               <RegisterForm />
             </DialogContent>
-          </Dialog> -->
+          </Dialog>
         </template>
       </div>
     </Container>

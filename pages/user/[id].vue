@@ -18,5 +18,5 @@ const idString = String(route.params.id);
 const id = idString ? decodeId(idString) : 0;
 
 const { data: dataUser } = useGetUser(id);
-const user = computed(() => dataUser.value.data);
+const user = computed(() => dataUser.value?.data);
 </script>

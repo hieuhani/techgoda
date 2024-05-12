@@ -2,10 +2,19 @@
   <div class="bg-white px-4 py-4 rounded-lg">
     <div class="flex items-center mb-3">
       <Avatar class="h-10 w-10 text-md">
-        <AvatarImage src="/hi.webp" alt="" />
+        <AvatarImage
+          :src="
+            post.author?.metadata?.avatar?.src
+              ? post.author.metadata.avatar.src
+              : '/hi.webp'
+          "
+          alt=""
+        />
       </Avatar>
       <div class="ml-2">
-        <h3 class="leading-none">Hieu Tran</h3>
+        <h3 class="leading-none">
+          {{ post.author?.displayName || "Anonymous" }}
+        </h3>
         <time class="text-xs text-gray-600 leading-none">
           {{ $dayjs(post.createdAt).fromNow() }}
         </time>

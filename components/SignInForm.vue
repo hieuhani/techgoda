@@ -11,14 +11,14 @@
     </FormField>
     <FormField v-slot="{ componentField }" name="password">
       <FormItem>
-        <FormLabel>Mật khẩu</FormLabel>
+        <FormLabel>Password</FormLabel>
         <FormControl>
           <Input type="password" v-bind="componentField" />
         </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit">Đăng nhập</Button>
+    <Button type="submit">Sign in</Button>
   </form>
 </template>
 

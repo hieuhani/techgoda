@@ -33,6 +33,7 @@
         <span class="text-green-600"><BadgeCheckIcon /></span>
       </div>
       <div v-if="isMyProfile" class="ml-auto">
+        <UpdateUserProfile />
         <UserSiteAppearance />
       </div>
     </div>
