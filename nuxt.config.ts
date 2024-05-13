@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     "dayjs-nuxt",
     "nuxt-vuefire",
   ],
+  routeRules: {
+    "/": { swr: 300 },
+    "/forums/**": { swr: 300 },
+    "/devfeeds/**": { swr: 300 },
+  },
   devServer: {
     port: 8080,
   },
