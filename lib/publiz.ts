@@ -342,3 +342,34 @@ export const useGetMetaSchemaPosts = (
     }
   );
 };
+
+export type OrganizationRole = {
+  name: string;
+  id: number;
+  organizationId: number;
+};
+
+export const getOrganizationRoles = (organizationId: number) => {
+  return publizFetch<BaseResponse<OrganizationRole[]>>(
+    `api/v1/my_organizations/${organizationId}/roles`
+  );
+};
+
+export const useGetOrganizationById = (idOrSlug: number | string) => {
+  return usePublizFetch<BaseResponse<Organization>>(
+    `api/v1/organizations/${idOrSlug}`
+  );
+};
+
+export const uploadOrganizationImage = (
+  organizationId: number,
+  formData: FormData
+) => {
+  return publizFetch<BaseResponse<PublizFile>>(
+    `api/v1/my_organizations/${organizationId}/image`,
+    {
+      body: formData,
+      method: "PATCH",
+    }
+  );
+};

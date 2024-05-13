@@ -47,7 +47,9 @@
                 class="hover:scale-110 transition-transform duration-300 object-cover h-full w-full"
               />
               <div class="absolute bottom-0 left-0 right-0 text-white py-2">
-                <h3 class="z-20 relative">Hieu Tran</h3>
+                <h3 class="z-20 relative">
+                  {{ story.author?.displayName }}
+                </h3>
                 <div
                   class="inset-0 absolute bg-gradient-to-t from-gray-900 to-transparent"
                 />

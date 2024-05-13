@@ -18,20 +18,15 @@
             <span>My profile</span>
           </NuxtLink>
         </DropdownMenuItem>
-        <!-- 
-        <DropdownMenuItem>
-          <Settings class="mr-2 h-4 w-4" />
-          <span>Cài đặt</span>
-        </DropdownMenuItem> -->
         <DropdownMenuItem as-child>
           <NuxtLink to="/write">
-            <Users class="mr-2 h-4 w-4" />
+            <SquarePen class="mr-2 h-4 w-4" />
             <span> Write </span>
           </NuxtLink>
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <!-- <DropdownMenuLabel>Organizations</DropdownMenuLabel>
+      <DropdownMenuLabel>Organizations</DropdownMenuLabel>
       <DropdownMenuGroup>
         <DropdownMenuItem
           v-for="myOrganization in myOrganizationsWithUrl"
@@ -39,20 +34,13 @@
           as-child
         >
           <NuxtLink :to="myOrganization.baseUrl">
-            <Users class="mr-2 h-4 w-4" />
+            <Building class="mr-2 h-4 w-4" />
             <span>
               {{ myOrganization.name }}
             </span>
           </NuxtLink>
         </DropdownMenuItem>
-
-        <DropdownMenuItem asChild v-if="!tenant">
-          <NuxtLink to="/new_organization">
-            <Plus class="mr-2 h-4 w-4" />
-            <span>Create organization</span>
-          </NuxtLink>
-        </DropdownMenuItem>
-      </DropdownMenuGroup> -->
+      </DropdownMenuGroup>
 
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
@@ -71,10 +59,10 @@
 import { signOut } from "firebase/auth";
 import {
   LogOut,
-  Plus,
-  Settings,
+  Building,
   User as UserIcon,
   Users,
+  SquarePen,
 } from "lucide-vue-next";
 import type { MyOrganization, User } from "~/lib/publiz";
 import { useBuildTenantUrl } from "~/lib/utils";

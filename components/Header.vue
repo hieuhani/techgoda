@@ -22,6 +22,7 @@
       </div>
       <ul
         class="flex lg:space-x-1 fixed py-1 lg:py-0 bottom-0 inset-x-0 bg-white lg:static shadow lg:shadow-none z-10 justify-center"
+        v-if="!tenant"
       >
         <li v-for="item in menuItems" :key="item.path">
           <NuxtLink
@@ -92,7 +93,7 @@
 import { Github } from "lucide-vue-next";
 import { buttonVariants } from "./ui/button";
 const { $currentUser, $myOrganizations } = useNuxtApp();
-
+const tenant = useTenant();
 const route = useRoute();
 const menuItems = [
   {
