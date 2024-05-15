@@ -1,16 +1,17 @@
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
-      <Button variant="link" class="px-1">
+      <Button variant="link" class="space-x-2 px-1">
         <WandIcon />
+        <span>Appearance</span>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent>
       <DropdownMenuItem as-child>
-        <label for="selectAvatarFile">Avatar</label>
+        <label for="selectAvatarFile">Change avatar</label>
       </DropdownMenuItem>
       <DropdownMenuItem as-child>
-        <label for="selectCoverFile">Cover</label>
+        <label for="selectCoverFile">Change cover</label>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
@@ -63,12 +64,17 @@ import { WandIcon } from "lucide-vue-next";
 // @ts-ignore
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
-import { uploadMyProfileImage } from "~/lib/publiz";
+import { uploadOrganizationImage } from "~/lib/publiz";
 
 const onSelectAvatarFile = (e: Event) => {
   onSelectFile(e, "avatar");
 };
-const { $refreshGetMyProfile } = useNuxtApp();
+
+const refreshOrganization = inject<() => Promise<unknown>>(
+  "refreshOrganization"
+);
+
+const props = defineProps<{ organizationId: number }>();
 
 const onSelectCoverFile = (e: Event) => {
   onSelectFile(e, "cover");
@@ -83,7 +89,7 @@ const title = computed(() =>
 const onSelectFile = (e: Event, type: string) => {
   const target = e.target as HTMLInputElement;
   const file = target.files?.[0];
-  if (file?.type.startsWith("image/")) {
+  if (file && file.type.startsWith("image/")) {
     const url = URL.createObjectURL(file);
     image.value = url;
     uploadType.value = type;
@@ -103,29 +109,16 @@ const upload = async () => {
         imageSmoothingEnabled: true,
         imageSmoothingQuality: "high",
       })
-      .toBlob(
-        async (blob: Blob) => {
-          const formData = new FormData();
-          const fileName = `${uploadType.value}.jpg`;
-          formData.append(
-            "file",
-            new File([blob], fileName, {
-              type: blob.type,
-            })
-          );
-          formData.append("type", uploadType.value);
-          await uploadMyProfileImage(formData);
-          image.value = "";
-          uploadType.value = "";
-          loading.value = false;
-
-          if (typeof $refreshGetMyProfile === "function") {
-            $refreshGetMyProfile();
-          }
-        },
-        "image/jpeg",
-        0.95
-      );
+      .toBlob(async (blob: Blob) => {
+        const formData = new FormData();
+        formData.append("file", blob);
+        formData.append("type", uploadType.value);
+        await uploadOrganizationImage(props.organizationId, formData);
+        image.value = "";
+        uploadType.value = "";
+        loading.value = false;
+        refreshOrganization?.();
+      });
   }
 };
 </script>

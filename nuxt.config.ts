@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     "nuxt-vuefire",
   ],
   routeRules: {
-    "/": { swr: 300 },
     "/forums/**": { swr: 300 },
     "/devfeeds/**": { swr: 300 },
   },
@@ -32,6 +31,11 @@ export default defineNuxtConfig({
   shadcn: {
     prefix: "",
     componentDir: "./components/ui",
+  },
+  multiTenancy: {
+    tenantDynamicRoute: "organization",
+    rootDomains: ["techgoda.local", "techgoda.net"],
+    customDomains: {},
   },
   vuefire: {
     auth: {

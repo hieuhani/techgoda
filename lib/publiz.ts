@@ -322,8 +322,8 @@ export const uploadMyProfileImage = (formData: FormData) => {
   );
 };
 
-export const getPostPath = (post: Post) =>
-  `/thread/${slugify(post.title.toLowerCase())}-${encodeId(post.id)}`;
+export const getPostPath = (post: Post, schema = "thread") =>
+  `/${schema}/${slugify(post.title.toLowerCase())}-${encodeId(post.id)}`;
 
 type GetMetaSchemaPostsQuery = {
   before?: string;
@@ -371,5 +371,45 @@ export const uploadOrganizationImage = (
       body: formData,
       method: "PATCH",
     }
+  );
+};
+
+export const useGetApplicableOrganizationMetaSchemas = (
+  organizationId: number
+) => {
+  return usePublizFetch<BaseResponse<MetaSchema[]>>(
+    `api/v1/my_organizations/${organizationId}/applicable_meta_schemas`
+  );
+};
+
+export const updateOrganizationMetadata = (
+  organizationId: number,
+  payload: { metaSchemaId: number; metadata: Record<string, string> }
+) => {
+  return publizFetch<BaseResponse<any>>(
+    `api/v1/my_organizations/${organizationId}/metadata`,
+    {
+      body: payload,
+      method: "PATCH",
+    }
+  );
+};
+
+export const useGetOrganizationPosts = (
+  organizationId: number | string,
+  options?: UseFetchOptions<BaseResponse<Post[]>>
+) => {
+  return usePublizFetch<BaseResponse<Post[]>>(
+    `api/v1/organizations/${organizationId}/posts`,
+    options
+  );
+};
+
+export const useGetMyOrganizationPost = (
+  organizationId: number,
+  id: number
+) => {
+  return usePublizFetch<BaseResponse<Post>>(
+    `api/v1/my_organizations/${organizationId}/posts/${id}`
   );
 };
