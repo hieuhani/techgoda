@@ -11,6 +11,16 @@
 
 The [Techgoda](https://techgoda.net) is a social publishing platform Nuxt app. Built with [Publiz](https://github.com/hieuhani/publiz) - an open meta-schema driven content management platform.
 
+## Highlight Features
+
+- Technology news website
+- Discussion forums
+- Developer social network news feed, story
+- Story content builder
+- Jobs listing for organization
+- Multi-tenancy website for organization
+- Optimized Google Cloud Storage images served by Google App Engine
+
 ## Built on open source
 
 The working website was built using:
@@ -24,7 +34,7 @@ The working website was built using:
 - [vuefire](https://vuefire.vuejs.org/nuxt/auth.html) for authentication
 - [Vercel](http://vercel.com/) for deployment
 - [Bun](https://bun.sh/) for development
-- [FabricJS](http://fabricjs.com/) for story creator
+- [FabricJS](http://fabricjs.com/) for story content builder
 
 ## Contributing
 
