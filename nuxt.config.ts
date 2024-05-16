@@ -10,6 +10,13 @@ export default defineNuxtConfig({
     "nuxt-vuefire",
   ],
   routeRules: {
+    "/": {
+      swr: 300,
+      cache: {
+        varies: ["host"],
+      },
+    },
+    "/jobs/**": { swr: 300 },
     "/forums/**": { swr: 300 },
     "/devfeeds/**": { swr: 300 },
   },
