@@ -45,7 +45,7 @@
               <img
                 v-if="story.metadata?.featuredImage?.src"
                 :src="
-                  getGoogleImage(story.metadata?.featuredImage?.src, 'w200')
+                  getGoogleImage(story.metadata?.featuredImage?.src, 'w200-rw')
                 "
                 class="hover:scale-110 transition-transform duration-300 object-cover h-full w-full"
               />

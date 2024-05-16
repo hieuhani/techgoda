@@ -32,7 +32,10 @@
                 <img
                   v-if="product.metadata?.featuredImage"
                   :src="
-                    getGoogleImage(product.metadata.featuredImage.src, 'w200')
+                    getGoogleImage(
+                      product.metadata.featuredImage.src,
+                      'w200-rw'
+                    )
                   "
                   alt="product image"
                   class="w-full aspect-square object-cover rounded-lg"

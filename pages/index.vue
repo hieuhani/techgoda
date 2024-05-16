@@ -13,7 +13,7 @@
                 :src="
                   getGoogleImage(
                     featuredPosts.topPost.metadata?.featuredImage.src,
-                    'w600'
+                    'w600-rw'
                   )
                 "
                 alt="post image"
@@ -35,7 +35,7 @@
                 :src="
                   getGoogleImage(
                     featuredPosts.secondPost.metadata?.featuredImage.src,
-                    'w600'
+                    'w600-rw'
                   )
                 "
                 alt="post image"
@@ -59,7 +59,9 @@
             <div v-if="post.metadata?.featuredImage" class="mb-2">
               <img
                 class="w-full object-cover rounded-lg aspect-[3/2]"
-                :src="getGoogleImage(post.metadata?.featuredImage.src, 'w600')"
+                :src="
+                  getGoogleImage(post.metadata?.featuredImage.src, 'w600-rw')
+                "
                 alt="post image"
               />
             </div>
@@ -90,7 +92,7 @@
                 <img
                   class="w-full object-cover rounded-lg aspect-[3/2]"
                   :src="
-                    getGoogleImage(post.metadata?.featuredImage.src, 'w200')
+                    getGoogleImage(post.metadata?.featuredImage.src, 'w200-rw')
                   "
                   alt="post image"
                 />

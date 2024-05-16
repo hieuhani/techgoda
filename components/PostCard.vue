@@ -26,7 +26,7 @@
       <div v-if="post.metadata?.featuredImage" class="mb-2">
         <img
           class="w-full h-full object-cover rounded-lg"
-          :src="getGoogleImage(post.metadata?.featuredImage.src, 'w1000')"
+          :src="getGoogleImage(post.metadata?.featuredImage.src, 'w1000-rw')"
           alt="post image"
         />
       </div>

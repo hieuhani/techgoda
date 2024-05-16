@@ -1,12 +1,13 @@
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger>
+    <DropdownMenuTrigger title="User avatar">
       <Avatar>
         <AvatarImage
           :src="
             user.metadata?.avatar?.src ? user.metadata.avatar.src : '/hi.webp'
           "
-          alt=""
+          role="img"
+          alt="Avatar"
         />
       </Avatar>
     </DropdownMenuTrigger>

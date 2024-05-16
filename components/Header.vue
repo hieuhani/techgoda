@@ -46,6 +46,7 @@
         <a
           href="https://github.com/hieuhani/techgoda"
           class="flex justify-center items-center px-2"
+          aria-label="Github repository for Techgoda"
         >
           <Github class="w-6 h-6" />
         </a>

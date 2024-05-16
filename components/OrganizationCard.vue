@@ -6,7 +6,7 @@
         class="absolute inset-0 rounded-xl overflow-hidden"
       >
         <img
-          :src="getGoogleImage(organization.metadata.cover.src, 'w1000')"
+          :src="getGoogleImage(organization.metadata.cover.src, 'w1000-rw')"
           alt=""
           class="w-full h-full object-cover"
         />
