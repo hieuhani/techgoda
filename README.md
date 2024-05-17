@@ -37,13 +37,24 @@ The working website was built using:
 - [Bun](https://bun.sh/) for development
 - [FabricJS](http://fabricjs.com/) for story content builder
 
+## Local Development
+
+Clone it for local development:
+
+```bash
+$ git clone https://github.com/hieuhani/techgoda.git
+$ cd techgoda
+$ bun install
+$ bun run dev
+```
+
 ## Contributing
 
 - [Open an issue](https://github.com/hieuhani/techgoda/issues) if you believe you've encountered a bug with this project.
 
-## Author
+## Sponsor
 
-- Hieu Tran ([@hieuhani](https://www.linkedin.com/in/hieuhani))
+Sponsor us to fuel continuous improvement, enhanced support, community growth, and ecosystem expansion. Let's shape the future of web development together!
 
 ## License
 
