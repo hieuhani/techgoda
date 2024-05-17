@@ -1,4 +1,5 @@
 <a href="https://techgoda.net">
+  <img alt="Techgoda" src="./public/github_banner.png">
   <h1 align="center">Techgoda</h1>
 </a>
 
