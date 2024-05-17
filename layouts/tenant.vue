@@ -1,6 +1,15 @@
 <template>
   <Header />
   <slot v-if="organization" />
+  <div class="text-center py-2">
+    <div class="text-gray-600 text-sm">
+      <span class="mr-1/2">Powered by</span>
+      <a href="https://techgoda.com" class="text-gray-600 hover:underline">
+        Techgoda
+      </a>
+    </div>
+  </div>
+  <div class="h-16 lg:hidden" />
 </template>
 
 <script setup lang="ts">

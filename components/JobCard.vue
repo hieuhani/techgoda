@@ -67,9 +67,6 @@ import { MapPin, Clock, BadgeDollarSign, CalendarDays } from "lucide-vue-next";
 import { type Post, getPostPath } from "~/lib/publiz";
 import { useBuildTenantUrl } from "~/lib/utils";
 
-import { slugify } from "~/lib/slugify";
-import { encodeId } from "~/lib/id";
-
 const workTypeDictionary: Record<string, string> = {
   FULL_TIME: "Full time",
   PART_TIME: "Part time",

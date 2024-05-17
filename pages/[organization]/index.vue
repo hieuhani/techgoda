@@ -1,6 +1,6 @@
 <template>
   <Container class="max-w-6xl mb-4">
-    <div v-if="organization" class="pt-4">
+    <div v-if="organization" class="pt-2 lg:pt-4">
       <OrganizationCard :organization="organization" class="mb-4" />
       <div
         v-if="amIOrganizationAdmin"
@@ -52,59 +52,8 @@
         </div>
         <div>
           <h3 class="text-primary uppercase text-sm font-medium mb-1">Jobs</h3>
-          <div class="space-y-2 -translate-x-2">
-            <NuxtLink
-              :to="getPostPath(job, 'job')"
-              v-for="job in jobs"
-              class="hover:bg-gray-50 rounded-lg px-2 py-2 duration-600 ease-in-out transition-colors block"
-            >
-              <div class="flex items-start">
-                <div class="flex-1">
-                  <h3 class="leading-6 mb-1">{{ job.title }}</h3>
-
-                  <div>
-                    <div
-                      class="flex items-center space-x-1 text-sm text-gray-500"
-                    >
-                      <BadgeDollarSign class="w-4 h-4" />
-                      <span>Salary</span>:
-                      <span class="text-green-600 font-medium">{{
-                        job.metadata?.salary
-                      }}</span>
-                    </div>
-                    <div
-                      class="flex items-center space-x-1 text-sm text-gray-500"
-                      v-if="job.metadata?.submissionDeadline"
-                    >
-                      <CalendarDays class="w-4 h-4" />
-                      <span>Dates</span>:
-                      <span class="text-green-600 font-medium">
-                        {{ job.metadata?.submissionDeadline }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex space-x-2">
-                  <div
-                    class="flex bg-red-200 text-red-600 rounded-full px-2 py-1 text-sm items-center space-x-1"
-                    v-if="job.metadata?.location"
-                  >
-                    <MapPin class="w-4 h-4" />
-                    <span>
-                      {{ job.metadata?.location }}
-                    </span>
-                  </div>
-                  <div
-                    class="flex bg-green-200 text-green-600 rounded-full px-2 py-1 text-sm items-center space-x-1"
-                  >
-                    <Clock class="w-4 h-4" />
-                    <span>
-                      {{ workTypeDictionary[job.metadata?.workType] }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </NuxtLink>
+          <div class="space-y-2">
+            <JobRow v-for="job in jobs" :key="job.id" :job="job" />
           </div>
         </div>
       </div>
@@ -119,13 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ShieldIcon,
-  MapPin,
-  Clock,
-  BadgeDollarSign,
-  CalendarDays,
-} from "lucide-vue-next";
+import { ShieldIcon } from "lucide-vue-next";
 import { buttonVariants } from "@/components/ui/button";
 import {
   type Organization,
