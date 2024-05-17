@@ -21,6 +21,7 @@ const postsFilter = ref({
   pageSize: 80,
   before: "",
   after: "",
+  context: JSON.stringify({ withOrganization: true }),
 });
 
 const filter = computed(() => ({

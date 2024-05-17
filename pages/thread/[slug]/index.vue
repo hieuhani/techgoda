@@ -8,16 +8,31 @@
 
       <article class="prose" v-html="post.content" />
     </div>
+    <div
+      v-if="isOwner"
+      class="fixed bottom-0 left-0 right-0 bg-white shadow-md z-10 flex justify-end"
+    >
+      <NuxtLink
+        :class="cn(buttonVariants({ variant: 'link' }), 'space-x-2 px-1')"
+        :to="`/thread/${route.params.slug}/edit`"
+      >
+        <PencilIcon />
+        <span>Edit</span>
+      </NuxtLink>
+    </div>
   </Container>
 </template>
 
 <script setup lang="ts">
 import { decodeId } from "~/lib/id";
 import { useGetPost } from "~/lib/publiz";
+import { cn } from "~/lib/utils";
+import { buttonVariants } from "~/components/ui/button";
 
 const route = useRoute();
 const idString = String(route.params.slug).split("-").pop();
 const id = idString ? decodeId(idString) : 0;
+const { $currentUser } = useNuxtApp();
 
 const { data } = useGetPost(id);
 const post = computed(() => data.value?.data);
@@ -31,5 +46,12 @@ useSeoMeta({
   ogDescription:
     post.value?.metadata?.excerpt ||
     "Techgoda is a publishing platform for developers.",
+});
+
+const isOwner = computed(() => {
+  return (
+    !!$currentUser?.value?.id &&
+    $currentUser?.value?.id === post.value?.authorId
+  );
 });
 </script>

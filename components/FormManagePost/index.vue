@@ -1,6 +1,7 @@
 <template>
   <ClientOnly>
     <SelectSchemaDialog
+      v-if="!route.query.schema"
       :organizationId="organization?.id"
       v-model="selectedMetaSchema"
       :preferredMetaSchemaId="post?.metadata?.metaSchemaId"
@@ -23,7 +24,10 @@
       <div class="w-full lg:w-60 flex flex-col">
         <div class="lg:order-1 space-y-3">
           <div v-for="(value, key) in properties">
-            <BlockWithTitle title="Image" v-if="key === 'featuredImage'">
+            <BlockWithTitle
+              title="Featured image"
+              v-if="key === 'featuredImage'"
+            >
               <SelectFeatureImage
                 v-model="body.featuredImage"
                 :contentImages="contentImages"
@@ -65,6 +69,8 @@ import {
   type MetaSchema,
   createMyPost,
   updateMyPost,
+  publizFetch,
+  type BaseResponse,
 } from "~/lib/publiz";
 import { useToast } from "../ui/toast";
 import SelectPostTags from "../SelectPostTags.vue";
@@ -82,12 +88,12 @@ import {
 } from "./helpers";
 
 const { toast } = useToast();
-
+const route = useRoute();
 const props = defineProps<{
   post?: Post;
 }>();
 
-const selectedMetaSchema = ref<MetaSchema | null>(null);
+const selectedMetaSchema = ref<MetaSchema | undefined>(undefined);
 
 const isPosting = ref(false);
 const postTitle = computed(() => (props.post ? "Edit" : "Create"));
@@ -99,6 +105,20 @@ const schemaHasFeaturedImage = computed(
   () => !!selectedMetaSchema.value?.schema?.properties?.featuredImage
 );
 
+watchEffect(async () => {
+  if (route.query.schema) {
+    const schemaUrl = organization.value?.id
+      ? `api/v1/my_organizations/${organization.value.id}/applicable_meta_schemas`
+      : "api/v1/meta_schemas";
+
+    const { data: dataMetaSchemas = [] } = await publizFetch<
+      BaseResponse<MetaSchema[]>
+    >(schemaUrl);
+    selectedMetaSchema.value = dataMetaSchemas.find(
+      (schema) => schema.name === route.query.schema
+    );
+  }
+});
 const properties = computed<Record<string, { type: string }>>(
   () => selectedMetaSchema.value?.schema?.properties || {}
 );

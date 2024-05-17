@@ -1,6 +1,7 @@
 <template>
-  <NuxtLink
-    :to="getPostPath(post, 'job')"
+  <a
+    :href="jobLink"
+    target="_blank"
     class="bg-white rounded-lg px-4 py-3 block"
   >
     <div class="flex items-start">
@@ -38,22 +39,20 @@
         </div>
       </div>
     </div>
-  </NuxtLink>
+  </a>
 </template>
 
 <script setup lang="ts">
-import { MapPin, Clock, BadgeDollarSign, CalendarDays } from "lucide-vue-next";
+import { MapPin, BadgeDollarSign, CalendarDays } from "lucide-vue-next";
 import { type Post, getPostPath } from "~/lib/publiz";
-import { slugify } from "~/lib/slugify";
-import { encodeId } from "~/lib/id";
-
-const workTypeDictionary: Record<string, string> = {
-  FULL_TIME: "Full time",
-  PART_TIME: "Part time",
-  CONTRACT: "Contract",
-  FREELANCE: "Freelance",
-  INTERNSHIP: "Internship",
-};
+import { useBuildTenantUrl } from "~/lib/utils";
 
 const props = defineProps<{ post: Post }>();
+const jobLink = computed(() => {
+  if (props.post.organization) {
+    const tenantBase = useBuildTenantUrl(props.post.organization.slug);
+    return `${tenantBase}${getPostPath(props.post, "job")}`;
+  }
+  return getPostPath(props.post, "job");
+});
 </script>

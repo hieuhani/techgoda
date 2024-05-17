@@ -20,6 +20,7 @@ const filter = ref({
   pageSize: 80,
   before: "",
   after: "",
+  context: JSON.stringify({ withOrganization: true }),
 });
 
 const { data: dataPosts } = useGetTaxonomyPosts("job", filter);

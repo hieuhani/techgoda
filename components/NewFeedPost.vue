@@ -1,8 +1,19 @@
 <template>
-  <div class="bg-white rounded-lg px-3 py-3">
+  <NuxtLink
+    to="/write?schema=devfeed"
+    class="bg-white rounded-lg px-3 py-3 block"
+  >
     <div class="flex space-x-3 mb-3">
       <Avatar class="h-10 w-10 text-md">
-        <AvatarImage src="/hi.webp" alt="" />
+        <AvatarImage
+          :src="
+            $currentUser?.metadata?.avatar?.src
+              ? $currentUser?.metadata?.avatar?.src
+              : '/hi.webp'
+          "
+          role="img"
+          alt="Avatar"
+        />
       </Avatar>
       <button
         class="bg-gray-100 flex-1 text-left px-3 rounded-full text-gray-600"
@@ -29,9 +40,11 @@
         <span>Location</span>
       </button>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
 import { Image, Vote, CalendarDays, MapPin } from "lucide-vue-next";
+
+const { $currentUser } = useNuxtApp();
 </script>

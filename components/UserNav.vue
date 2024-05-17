@@ -20,7 +20,7 @@
           </NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem as-child>
-          <NuxtLink to="/write">
+          <NuxtLink to="/write?schema=post">
             <SquarePen class="mr-2 h-4 w-4" />
             <span> Write </span>
           </NuxtLink>

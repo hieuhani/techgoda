@@ -12,7 +12,7 @@
       v-else
       class="bg-gray-100 p-3 rounded text-center text-sm text-gray-500"
     >
-      Choose cover image from the list below
+      Add image to the post, then select one as cover image
     </div>
   </div>
 

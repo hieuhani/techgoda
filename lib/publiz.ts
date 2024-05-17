@@ -131,6 +131,7 @@ export type Post = {
   tags?: Tag[];
   authorId: number;
   author?: Omit<User, "authId">;
+  organization?: Organization;
 };
 
 type GetTaxonomiesPostsQuery = {
@@ -138,9 +139,10 @@ type GetTaxonomiesPostsQuery = {
   after?: string;
   pageSize?: number;
   tag?: string;
+  context?: string;
 };
 
-const publizFetch = $fetch.create({
+export const publizFetch = $fetch.create({
   baseURL: import.meta.env.VITE_PUBLIZ_API_URL,
   async onRequest(ctx) {
     const currentUser = await getCurrentUser();
@@ -304,8 +306,17 @@ export const useGetCollectionPosts = (
   );
 };
 
-export const useGetPost = (id: number) => {
-  return usePublizFetch<BaseResponse<Post>>(`api/v1/posts/${id}`);
+type GetPostQuery = {
+  context?: string;
+};
+
+export const useGetPost = (
+  id: number,
+  query?: GetPostQuery | Ref<GetPostQuery>
+) => {
+  return usePublizFetch<BaseResponse<Post>>(`api/v1/posts/${id}`, {
+    params: query,
+  });
 };
 
 export const useGetUser = (id: number | string) => {
