@@ -432,3 +432,7 @@ export const useGetOrganizations = () => {
 export const useGetUserPosts = (userId: number | string) => {
   return usePublizFetch<BaseResponse<Post[]>>(`api/v1/users/${userId}/posts`);
 };
+
+export const useGetMyPosts = () => {
+  return usePublizFetch<BaseResponse<Post>>("api/v1/my_posts");
+};

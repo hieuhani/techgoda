@@ -20,6 +20,12 @@
           </NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem as-child>
+          <NuxtLink :to="`/user/my-posts`">
+            <Newspaper class="mr-2 h-4 w-4" />
+            <span>My posts</span>
+          </NuxtLink>
+        </DropdownMenuItem>
+        <DropdownMenuItem as-child>
           <NuxtLink to="/write?schema=post">
             <SquarePen class="mr-2 h-4 w-4" />
             <span> Write </span>
@@ -62,7 +68,7 @@ import {
   LogOut,
   Building,
   User as UserIcon,
-  Users,
+  Newspaper,
   SquarePen,
 } from "lucide-vue-next";
 import type { MyOrganization, User } from "~/lib/publiz";
@@ -73,8 +79,6 @@ interface Props {
   user: User;
   myOrganizations: MyOrganization[];
 }
-
-const tenant = useTenant();
 
 const props = defineProps<Props>();
 const auth = useFirebaseAuth()!;

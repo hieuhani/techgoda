@@ -59,5 +59,6 @@ export default defineNuxtConfig({
   gtag: {
     enabled: !!process.env.NUXT_PUBLIC_GTAG_ID,
     id: process.env.NUXT_PUBLIC_GTAG_ID,
+    tags: [],
   },
 });
