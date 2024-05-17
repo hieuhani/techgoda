@@ -1,6 +1,9 @@
 <template>
   <div class="bg-white px-4 py-4 rounded-lg">
-    <div class="flex items-center mb-3">
+    <NuxtLink
+      :to="post.author?.id ? `/user/${encodeId(post.author.id)}` : '/'"
+      class="flex items-center mb-3"
+    >
       <Avatar class="h-10 w-10 text-md">
         <AvatarImage
           :src="
@@ -19,7 +22,7 @@
           {{ $dayjs(post.createdAt).fromNow() }}
         </time>
       </div>
-    </div>
+    </NuxtLink>
     <NuxtLink :to="`/thread/${slug}`" class="block">
       <h3 class="font-medium text-lg mb-1">{{ post.title }}</h3>
       <p class="text-sm text-gray-500 mb-2">{{ post.metadata?.excerpt }}</p>

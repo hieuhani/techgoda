@@ -145,7 +145,6 @@ definePageMeta({
 const organization = inject<Ref<Organization | undefined>>("organization");
 const tenant = useTenant();
 const amIOrganizationAdmin = inject<boolean>("amIOrganizationAdmin");
-const route = useRoute();
 const { data } = useGetOrganizationPosts(tenant);
 const { data: dataSystemMetaSchemas } = useGetSystemMetaSchemas();
 const workTypeDictionary: Record<string, string> = {
