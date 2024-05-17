@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "nuxt-multi-tenancy",
     "dayjs-nuxt",
     "nuxt-vuefire",
+    "nuxt-gtag",
   ],
   routeRules: {
     "/": {
@@ -54,5 +55,9 @@ export default defineNuxtConfig({
       projectId: process.env.NUXT_PUBLIC_FIREBASE_PROJECT_ID,
       appId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID,
     },
+  },
+  gtag: {
+    enabled: !!process.env.NUXT_PUBLIC_GTAG_ID,
+    id: process.env.NUXT_PUBLIC_GTAG_ID,
   },
 });
