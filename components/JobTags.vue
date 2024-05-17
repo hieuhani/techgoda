@@ -1,5 +1,13 @@
 <template>
   <div>
+    <div class="flex items-center justify-between mb-2 pr-2">
+      <h3 class="uppercase font-medium text-sm text-gray-600">Filter by</h3>
+
+      <NuxtLink to="/jobs" v-if="route.params.slug" class="text-gray-500">
+        <CircleX class="w-5 h-5" />
+      </NuxtLink>
+    </div>
+
     <ul
       class="-translate-x-2 flex flex-row lg:flex-col overflow-x-auto flex-nowrap lg:space-y-1"
     >
@@ -22,6 +30,7 @@
 
 <script setup lang="ts">
 import { useGetTaxonomyTags } from "~/lib/publiz";
+import { CircleX } from "lucide-vue-next";
 
 const { data: dataCommunityTags } = useGetTaxonomyTags("job");
 const communityTags = computed(() => dataCommunityTags?.value?.data || []);
