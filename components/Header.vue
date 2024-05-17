@@ -64,7 +64,7 @@
                 Sign in
               </a>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent class="max-w-sm">
               <DialogHeader>
                 <DialogTitle>Sign in</DialogTitle>
               </DialogHeader>
@@ -77,7 +77,7 @@
                 Sign up
               </a>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent class="max-w-sm">
               <DialogHeader>
                 <DialogTitle>Sign up</DialogTitle>
               </DialogHeader>

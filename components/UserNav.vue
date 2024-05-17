@@ -82,8 +82,8 @@ interface Props {
 
 const props = defineProps<Props>();
 const auth = useFirebaseAuth()!;
-const onLogOut = () => {
-  signOut(auth);
+const onLogOut = async () => {
+  await signOut(auth);
   window.location.reload();
 };
 
