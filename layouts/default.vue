@@ -2,6 +2,7 @@
   <Header />
   <slot />
   <div class="h-16 lg:hidden" />
+  <Footer />
 </template>
 
 <script setup lang="ts">
