@@ -4,7 +4,7 @@
   <div class="text-center py-2">
     <div class="text-gray-600 text-sm">
       <span class="mr-1/2">Powered by</span>
-      <a href="https://techgoda.com" class="text-gray-600 hover:underline">
+      <a href="https://techgoda.net" class="text-gray-600 hover:underline">
         Techgoda
       </a>
     </div>

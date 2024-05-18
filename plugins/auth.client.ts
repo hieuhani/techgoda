@@ -5,6 +5,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const { data: myProfileResponse, refresh: refreshGetMyProfile } =
     useGetMyProfile({
       immediate: false,
+      cache: "no-cache",
     });
   const { data: myOrganizationsResponse, refresh: refreshGetMyOrganizations } =
     useGetMyOrganizations({

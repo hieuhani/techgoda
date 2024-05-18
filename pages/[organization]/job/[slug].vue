@@ -95,11 +95,12 @@
               </div>
             </div>
           </div>
-          <div class="mt-3 pl-8">
+          <div
+            class="lg:mt-3 py-1 pl-2 pr-2 lg:pr-2 lg:pl-8 fixed bottom-0 inset-x-0 lg:static"
+          >
             <Button
               as="a"
               :href="`mailto:${post.metadata?.contactEmail}?subject=Application for ${post.title}`"
-              variant="outline"
               class="w-full"
             >
               Apply
