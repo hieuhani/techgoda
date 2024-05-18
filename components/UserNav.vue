@@ -79,11 +79,17 @@ interface Props {
   user: User;
   myOrganizations: MyOrganization[];
 }
+const { $refreshGetMyProfile } = useNuxtApp();
 
 const props = defineProps<Props>();
 const auth = useFirebaseAuth()!;
 const onLogOut = async () => {
   await signOut(auth);
+  if (typeof $refreshGetMyProfile === "function") {
+    $refreshGetMyProfile({
+      cache: "no-cache",
+    });
+  }
   window.location.reload();
 };
 

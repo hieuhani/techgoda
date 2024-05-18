@@ -20,6 +20,12 @@ export default defineNuxtConfig({
     "/jobs/**": { swr: 300 },
     "/forums/**": { swr: 300 },
     "/devfeeds/**": { swr: 300 },
+    "/thread/**": {
+      swr: 300,
+      cache: {
+        varies: ["host"],
+      },
+    },
   },
   devServer: {
     port: 8080,
