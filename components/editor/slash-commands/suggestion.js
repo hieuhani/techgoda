@@ -29,7 +29,7 @@ export default {
         },
       },
       {
-        title: "Danh sách",
+        title: "List",
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).toggleBulletList().run();
         },
@@ -42,13 +42,13 @@ export default {
         },
       },
       {
-        title: "Phân trang",
+        title: "Page break",
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).setHorizontalRule().run();
         },
       },
       {
-        title: "Hình ảnh",
+        title: "Image",
         command: ({ editor, range }) => {
           editor.chain().focus().deleteRange(range).setImageUpload().run();
         },

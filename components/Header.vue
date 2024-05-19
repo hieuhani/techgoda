@@ -45,7 +45,7 @@
       <div class="flex space-x-2 ml-auto">
         <a
           href="https://github.com/hieuhani/techgoda"
-          class="flex justify-center items-center px-2"
+          class="hidden lg:flex justify-center items-center px-2"
           aria-label="Github repository for Techgoda"
         >
           <Github class="w-6 h-6" />
@@ -59,7 +59,10 @@
               <a
                 href="/login"
                 @click.prevent=""
-                :class="buttonVariants({ variant: 'secondary' })"
+                :class="[
+                  buttonVariants({ variant: 'secondary', size: 'sm' }),
+                  'lg:h-10 lg:px-4 lg:py-2',
+                ]"
               >
                 Sign in
               </a>
@@ -73,7 +76,14 @@
           </Dialog>
           <Dialog>
             <DialogTrigger>
-              <a href="/register" @click.prevent="" :class="buttonVariants()">
+              <a
+                href="/register"
+                @click.prevent=""
+                :class="[
+                  buttonVariants({ size: 'sm' }),
+                  'lg:h-10 lg:px-4 lg:py-2',
+                ]"
+              >
                 Sign up
               </a>
             </DialogTrigger>

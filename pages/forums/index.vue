@@ -4,7 +4,7 @@
     <div class="flex-1 space-y-4">
       <PostCard v-for="post in posts" :post="post" :key="post.id" />
     </div>
-    <div class="w-96 pl-2">
+    <div class="max-w-96 pl-2">
       <ul
         class="space-y-4 border-l border-b rounded-bl-2xl border-dotted pl-5 pb-5 border-primary"
       >
