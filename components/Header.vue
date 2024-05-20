@@ -21,24 +21,25 @@
         </NuxtLink>
       </div>
       <ul
-        class="flex lg:space-x-1 fixed py-1 lg:py-0 bottom-0 inset-x-0 bg-white lg:static shadow lg:shadow-none z-10 justify-center"
+        class="flex lg:space-x-1 fixed md:py-1 lg:py-0 bottom-0 inset-x-0 bg-white lg:static shadow lg:shadow-none z-10 justify-center"
         v-if="!tenant"
       >
         <li v-for="item in menuItems" :key="item.path">
           <NuxtLink
             :to="item.path"
             :class="[
-              'inline-flex px-4 py-2 hover:bg-primary/20 hover:text-primary rounded-full',
+              'inline-flex flex-col md:flex-row px-4 py-1 md:py-2 hover:bg-primary/20 hover:text-primary rounded md:rounded-full items-center md:gap-2',
               item.path === '/'
                 ? item.path === route.fullPath
-                  ? 'text-white bg-primary'
+                  ? 'text-primary md:text-white md:bg-primary'
                   : 'text-gray-800 hover:bg-gray-50'
                 : route.fullPath.startsWith(item.path)
-                ? 'text-white bg-primary'
+                ? 'text-primary md:text-white md:bg-primary'
                 : 'text-gray-800 hover:bg-gray-50',
             ]"
           >
-            {{ item.name }}
+            <component :is="item.icon" class="w-6 h-6" />
+            <span class="text-xs md:text-base">{{ item.name }}</span>
           </NuxtLink>
         </li>
       </ul>
@@ -101,7 +102,13 @@
 </template>
 
 <script setup lang="ts">
-import { Github } from "lucide-vue-next";
+import {
+  BriefcaseBusiness,
+  Github,
+  Home,
+  MessageSquare,
+  Newspaper,
+} from "lucide-vue-next";
 import { buttonVariants } from "./ui/button";
 const { $currentUser, $myOrganizations } = useNuxtApp();
 const tenant = useTenant();
@@ -110,18 +117,22 @@ const menuItems = [
   {
     name: "Home",
     path: "/",
+    icon: Home,
   },
   {
     name: "Forums",
     path: "/forums",
+    icon: MessageSquare,
   },
   {
     name: "Devfeeds",
     path: "/devfeeds",
+    icon: Newspaper,
   },
   {
     name: "Jobs",
     path: "/jobs",
+    icon: BriefcaseBusiness,
   },
 ];
 </script>

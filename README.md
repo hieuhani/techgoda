@@ -17,7 +17,7 @@ The [Techgoda](https://techgoda.net) is a social publishing platform Nuxt app. B
 - Technology news website
 - Discussion forums
 - Developer social network news feed, story
-- Story content builder
+- Story content builder (meme editor)
 - Jobs listing for organization
 - Multi-tenancy website for organization
 - Optimized Google Cloud Storage images served by Google App Engine

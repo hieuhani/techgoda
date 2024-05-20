@@ -306,6 +306,19 @@ export const useGetCollectionPosts = (
   );
 };
 
+type GetModeratingPostsQuery = {
+  before?: string;
+  after?: string;
+  pageSize?: number;
+};
+export const useGetModeratingPosts = (
+  query: GetModeratingPostsQuery | Ref<GetModeratingPostsQuery>
+) => {
+  return usePublizFetch<BaseResponse<Post[]>>("api/v1/moderating_posts", {
+    params: query,
+  });
+};
+
 type GetPostQuery = {
   context?: string;
 };
