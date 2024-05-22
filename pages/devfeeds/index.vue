@@ -39,25 +39,7 @@
             :key="story.id"
             class="basis-auto"
           >
-            <button
-              class="w-36 bg-gray-100 rounded-lg overflow-hidden h-full relative"
-            >
-              <img
-                v-if="story.metadata?.featuredImage?.src"
-                :src="
-                  getGoogleImage(story.metadata?.featuredImage?.src, 'w200-rw')
-                "
-                class="hover:scale-110 transition-transform duration-300 object-cover h-full w-full"
-              />
-              <div class="absolute bottom-0 left-0 right-0 text-white py-2">
-                <h3 class="z-20 relative">
-                  {{ story.author?.displayName }}
-                </h3>
-                <div
-                  class="inset-0 absolute bg-gradient-to-t from-gray-900 to-transparent"
-                />
-              </div>
-            </button>
+            <StoryCard :story="story" />
           </CarouselItem>
         </CarouselContent>
         <CarouselPrevious class="left-2 disabled:hidden" />
