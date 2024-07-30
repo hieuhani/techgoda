@@ -56,7 +56,7 @@
           </div>
           <div class="ml-auto flex text-gray-400 items-center">
             <NuxtLink
-              :to="`/${slugify(post.title.toLowerCase())}-${encodeId(post.id)}`"
+              :to="`/${slugify(post.title.toLowerCase())}-${post.id}`"
               class="w-10 h-10 flex items-center justify-center hover:bg-gray-100"
             >
               <EyeIcon class="h-5 w-5" />
@@ -65,7 +65,7 @@
               :to="`/manage/posts/${post.id}`"
               class="w-10 h-10 flex items-center justify-center hover:bg-gray-100"
             >
-              <PencilIcon class="h-4 w-4" />
+              <Pencil class="h-4 w-4" />
             </NuxtLink>
           </div>
         </div>
@@ -76,7 +76,7 @@
 
 <script setup lang="ts">
 import { buttonVariants } from "~/components/ui/button";
-import { PlusIcon, EyeIcon, PencilIcon } from "lucide-vue-next";
+import { PlusIcon, EyeIcon, Pencil } from "lucide-vue-next";
 import {
   useGetApplicableOrganizationMetaSchemas,
   usePublizFetch,

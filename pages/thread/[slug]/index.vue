@@ -16,7 +16,7 @@
         :class="cn(buttonVariants({ variant: 'link' }), 'space-x-2 px-1')"
         :to="`/thread/${route.params.slug}/edit`"
       >
-        <PencilIcon />
+        <Pencil />
         <span>Edit</span>
       </NuxtLink>
     </div>
@@ -24,17 +24,16 @@
 </template>
 
 <script setup lang="ts">
-import { decodeId } from "~/lib/id";
 import { useGetPost } from "~/lib/publiz";
 import { cn } from "~/lib/utils";
 import { buttonVariants } from "~/components/ui/button";
+import { Pencil } from "lucide-vue-next";
 
 const route = useRoute();
 const idString = String(route.params.slug).split("-").pop();
-const id = idString ? decodeId(idString) : 0;
 const { $currentUser } = useNuxtApp();
 
-const { data } = useGetPost(id);
+const { data } = useGetPost(idString || "");
 const post = computed(() => data.value?.data);
 
 useSeoMeta({

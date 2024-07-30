@@ -22,7 +22,7 @@ export const getInitialPostBody = (body: PostBody) => {
 };
 
 export const buildFormFiles = (
-  postId: number,
+  postId: string,
   images: ImageBlockAttrs["attrs"][]
 ) => {
   return images.reduce<Record<string, FormData>>((prev, current) => {

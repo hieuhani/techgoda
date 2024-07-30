@@ -113,7 +113,6 @@
 </template>
 
 <script setup lang="ts">
-import { decodeId } from "~/lib/id";
 import { useGetPost, type Organization } from "~/lib/publiz";
 import {
   Factory,
@@ -135,9 +134,8 @@ const workTypeDictionary: Record<string, string> = {
 };
 const route = useRoute();
 const idString = String(route.params.slug).split("-").pop();
-const id = idString ? decodeId(idString) : 0;
 
-const { data } = useGetPost(id);
+const { data } = useGetPost(idString || "");
 const post = computed(() => data.value?.data);
 const organization = inject<Ref<Organization | undefined>>("organization");
 </script>

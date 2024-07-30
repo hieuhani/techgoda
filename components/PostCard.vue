@@ -45,6 +45,6 @@ import { getGoogleImage } from "@/lib/google-image";
 
 const props = defineProps<{ post: Post }>();
 const slug = computed(
-  () => `${slugify(props.post.title.toLowerCase())}-${encodeId(props.post.id)}`
+  () => `${slugify(props.post.title.toLowerCase())}-${props.post.id}`
 );
 </script>

@@ -119,7 +119,7 @@ export type OrganizationUser = User & {
 };
 
 export type Post = {
-  id: number;
+  id: string;
   title: string;
   content: string;
   parentId?: number;
@@ -242,7 +242,7 @@ export const createOrganizationPost = (
 
 export const updateOrganizationPost = (
   organizationId: number,
-  id: number,
+  id: string,
   input: UpdatePostInput
 ) => {
   return publizFetch<BaseResponse<Post>>(
@@ -268,7 +268,7 @@ export const createMyPost = (input: CreatePostInput) => {
   });
 };
 
-export const updateMyPost = (id: number, input: UpdatePostInput) => {
+export const updateMyPost = (id: string, input: UpdatePostInput) => {
   return publizFetch<BaseResponse<Post>>(`api/v1/my_posts/${id}`, {
     body: input,
     method: "PUT",
@@ -324,7 +324,7 @@ type GetPostQuery = {
 };
 
 export const useGetPost = (
-  id: number,
+  id: number | string,
   query?: GetPostQuery | Ref<GetPostQuery>
 ) => {
   return usePublizFetch<BaseResponse<Post>>(`api/v1/posts/${id}`, {
@@ -347,7 +347,7 @@ export const uploadMyProfileImage = (formData: FormData) => {
 };
 
 export const getPostPath = (post: Post, schema = "thread") =>
-  `/${schema}/${slugify(post.title.toLowerCase())}-${encodeId(post.id)}`;
+  `/${schema}/${slugify(post.title.toLowerCase())}-${post.id}`;
 
 type GetMetaSchemaPostsQuery = {
   before?: string;
