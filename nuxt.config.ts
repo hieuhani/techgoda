@@ -26,6 +26,9 @@ export default defineNuxtConfig({
         varies: ["host"],
       },
     },
+    "/user/my-posts": {
+      ssr: false,
+    },
   },
   devServer: {
     port: 8080,
@@ -68,3 +71,5 @@ export default defineNuxtConfig({
     tags: [],
   },
 });
+
+console.log(process.env.VITE_PUBLIZ_API_URL);

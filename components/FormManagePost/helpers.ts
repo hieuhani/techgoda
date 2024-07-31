@@ -106,7 +106,7 @@ export const replaceFeatureImage = (
 export const buildPostBody = (
   body: PostBody,
   content: JSONContent,
-  metaSchemaId: number,
+  metaSchema: string,
   metadata: any
 ) => ({
   title: body.title,
@@ -115,5 +115,5 @@ export const buildPostBody = (
   contentJson: content,
   status: "PUBLISHED" as const,
   metadata,
-  metaSchemaId,
+  metaSchema,
 });

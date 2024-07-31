@@ -154,6 +154,11 @@ const contentImages = computed(() =>
     .filter((item) => item.type === "imageBlock")
     .map((item) => (item as ImageBlockAttrs).attrs)
 );
+const preferredMetaSchema = computed(() =>
+  selectedMetaSchema.value
+    ? `${selectedMetaSchema.value.name}:${selectedMetaSchema.value.version}`
+    : ""
+);
 
 const onSubmit = async () => {
   isPosting.value = true;
@@ -190,7 +195,7 @@ const onSubmit = async () => {
         const { data: post } = await updateOrganizationPost(
           organizationId,
           initialPostId,
-          buildPostBody(body, contentWithFile, selectedMetaSchema.value!.id, {
+          buildPostBody(body, contentWithFile, preferredMetaSchema.value, {
             ...props.post?.metadata,
             ...(featuredImage && schemaHasFeaturedImage
               ? { featuredImage }
@@ -201,7 +206,7 @@ const onSubmit = async () => {
       } else {
         const { data: post } = await updateMyPost(
           initialPostId,
-          buildPostBody(body, contentWithFile, selectedMetaSchema.value!.id, {
+          buildPostBody(body, contentWithFile, preferredMetaSchema.value, {
             ...props.post?.metadata,
             ...(featuredImage && schemaHasFeaturedImage
               ? { featuredImage }
@@ -215,7 +220,7 @@ const onSubmit = async () => {
       const updatePost = buildPostBody(
         body,
         body.content,
-        selectedMetaSchema.value!.id,
+        preferredMetaSchema.value,
         {
           ...props.post?.metadata,
           ...(body.featuredImage && schemaHasFeaturedImage

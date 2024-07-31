@@ -1,18 +1,14 @@
 <template>
-  <ClientOnly>
-    <Container v-if="$currentUser" class="mt-2">
-      <div class="bg-white rounded-lg px-4 py-4 space-y-3">
-        <div>
-          <h3 class="text-primary uppercase text-sm font-medium">Posts</h3>
-          <PostRow v-for="post in posts" :post="post" :key="post.id" />
-        </div>
-        <div>
-          <h3 class="text-primary uppercase text-sm font-medium">Devfeeds</h3>
-          <PostRow v-for="post in devfeedPosts" :post="post" :key="post.id" />
-        </div>
+  <Container v-if="$currentUser" class="mt-2">
+    <div class="bg-white rounded-lg px-4 py-4 space-y-3">
+      <div v-for="(value, key) in postsByMetaSchemaId">
+        <h3 class="text-primary uppercase text-sm font-medium">
+          {{ key || "No schema" }}
+        </h3>
+        <PostRow v-for="post in value" :post="post" :key="post.id" />
       </div>
-    </Container>
-  </ClientOnly>
+    </div>
+  </Container>
 </template>
 
 <script setup lang="ts">
@@ -43,23 +39,13 @@ const systemMetaSchemaMap = computed(() =>
 const postsByMetaSchemaId = computed(() =>
   (dataUserPosts.value?.data || ([] as const)).reduce<Record<string, Post[]>>(
     (prev, current) => {
-      const { metaSchemaId = 0 } = current.metadata;
+      const { metaSchema = "" } = current;
       return {
         ...prev,
-        [metaSchemaId]: [...(prev[metaSchemaId] || []), current],
+        [metaSchema]: [...(prev[metaSchema] || []), current],
       };
     },
     {}
   )
 );
-
-const posts = computed(() => {
-  if (!systemMetaSchemaMap.value.post?.id) return [];
-  return postsByMetaSchemaId.value[systemMetaSchemaMap.value.post?.id] || [];
-});
-
-const devfeedPosts = computed(() => {
-  if (!systemMetaSchemaMap.value.devfeed?.id) return [];
-  return postsByMetaSchemaId.value[systemMetaSchemaMap.value.devfeed?.id] || [];
-});
 </script>

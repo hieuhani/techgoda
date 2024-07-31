@@ -128,6 +128,7 @@ export type Post = {
   metadata: any;
   createdAt: string;
   contentJson: any;
+  metaSchema: string;
   tags?: Tag[];
   authorId: number;
   author?: Omit<User, "authId">;
@@ -141,7 +142,7 @@ type GetTaxonomiesPostsQuery = {
   tag?: string;
   context?: string;
 };
-
+console.log(import.meta.env.VITE_PUBLIZ_API_URL);
 export const publizFetch = $fetch.create({
   baseURL: import.meta.env.VITE_PUBLIZ_API_URL,
   async onRequest(ctx) {
@@ -447,5 +448,5 @@ export const useGetUserPosts = (userId: number | string) => {
 };
 
 export const useGetMyPosts = () => {
-  return usePublizFetch<BaseResponse<Post>>("api/v1/my_posts");
+  return usePublizFetch<BaseResponse<Post[]>>("api/v1/my_posts");
 };
