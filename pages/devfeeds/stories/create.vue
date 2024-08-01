@@ -227,7 +227,8 @@ const onSelectionCleared = (e: any) => {
 const activeObjectType = computed(() => {
   if (activeObject.value instanceof Textbox) {
     return "text";
-  } else if (activeObject.value instanceof FabricImage) {
+  }
+  if (activeObject.value instanceof FabricImage) {
     return "image";
   }
   return null;

@@ -1,5 +1,5 @@
 <template>
-  <Container class="pt-3">
+  <Container class="pt-3 space-y-6">
     <div class="grid grid-cols-12 gap-5">
       <div class="grid grid-cols-12 col-span-12 lg:col-span-8 gap-4">
         <div v-if="featuredPosts.topPost" class="col-span-12 lg:col-span-8">
@@ -75,7 +75,7 @@
         <ul
           class="space-y-4 border-l border-b rounded-bl-2xl border-dotted pl-5 pb-5 border-primary"
         >
-          <li v-for="post in otherPosts" :key="post.id" class="relative">
+          <li v-for="post in next8Posts" :key="post.id" class="relative">
             <span
               class="bg-primary w-2 h-2 rounded-full absolute -left-6 top-2"
             />
@@ -102,6 +102,62 @@
         </ul>
       </div>
     </div>
+    <div class="grid grid-cols-12">
+      <div class="col-span-8">
+        <div class="grid grid-cols-12 gap-6 mb-10">
+          <NuxtLink
+            v-for="(post, index) in next6Posts"
+            :key="post.id"
+            :to="getPostPath(post)"
+            class="col-span-6 flex space-x-3"
+          >
+            <div>
+              <span class="text-4xl font-medium text-gray-500">
+                #{{ index + 1 }}
+              </span>
+            </div>
+            <div>
+              <h3 class="font-medium line-clamp-2">
+                {{ post.title }}
+              </h3>
+              <p class="text-sm">
+                {{ post.author?.displayName }}
+              </p>
+            </div>
+          </NuxtLink>
+        </div>
+        <div class="space-y-6">
+          <NuxtLink
+            v-for="post in otherPosts"
+            :to="getPostPath(post)"
+            class="flex space-x-4"
+          >
+            <div v-if="post.metadata?.featuredImage" class="w-48">
+              <img
+                class="w-full object-cover rounded-lg aspect-[3/2]"
+                :src="
+                  getGoogleImage(post.metadata?.featuredImage.src, 'w200-rw')
+                "
+                alt="post image"
+              />
+            </div>
+            <div class="flex-1">
+              <h3 class="line-clamp-3 font-medium">
+                {{ post.title }}
+              </h3>
+              <p class="text-sm text-gray-600">
+                {{ $dayjs(post.createdAt).fromNow() }}
+              </p>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+      <div class="col-span-4">
+        <ClientOnly>
+          <DevfeedSideBar />
+        </ClientOnly>
+      </div>
+    </div>
   </Container>
 </template>
 
@@ -110,7 +166,7 @@ import { useGetCollectionPosts, getPostPath } from "~/lib/publiz";
 import { getGoogleImage } from "@/lib/google-image";
 
 const { data: dataPosts } = useGetCollectionPosts("featured-posts", {
-  pageSize: 13,
+  pageSize: 27,
   before: "",
   after: "",
 });
@@ -127,5 +183,7 @@ const featuredPosts = computed(() => {
 const threeOtherPosts = computed(() =>
   featuredPosts.value.otherPosts.slice(0, 3)
 );
-const otherPosts = computed(() => featuredPosts.value.otherPosts.slice(3));
+const next8Posts = computed(() => featuredPosts.value.otherPosts.slice(3, 11));
+const next6Posts = computed(() => featuredPosts.value.otherPosts.slice(11, 17));
+const otherPosts = computed(() => featuredPosts.value.otherPosts.slice(17));
 </script>

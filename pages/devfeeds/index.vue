@@ -59,7 +59,6 @@
 <script setup lang="ts">
 import { Sparkle, Users, Telescope, UserSearch } from "lucide-vue-next";
 import { useGetMetaSchemaPosts, useGetTaxonomyPosts } from "~/lib/publiz";
-import { getGoogleImage } from "@/lib/google-image";
 
 const { $currentUser } = useNuxtApp();
 const { data: dataPosts } = useGetMetaSchemaPosts("story:1", {

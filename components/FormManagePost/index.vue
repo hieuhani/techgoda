@@ -71,6 +71,7 @@ import {
   updateMyPost,
   publizFetch,
   type BaseResponse,
+  getPostPath,
 } from "~/lib/publiz";
 import { useToast } from "../ui/toast";
 import SelectPostTags from "../SelectPostTags.vue";
@@ -164,7 +165,7 @@ const onSubmit = async () => {
   isPosting.value = true;
   try {
     const organizationId = organization.value?.id;
-
+    let afterPost: Post | undefined = undefined;
     const blobContentImages = getBlobContentImages(contentImages.value);
     if (blobContentImages.length > 0) {
       let initialPostId = props.post?.id;
@@ -203,6 +204,7 @@ const onSubmit = async () => {
             ...postMetadata,
           })
         );
+        afterPost = post;
       } else {
         const { data: post } = await updateMyPost(
           initialPostId,
@@ -214,6 +216,7 @@ const onSubmit = async () => {
             ...postMetadata,
           })
         );
+        afterPost = post;
       }
     } else {
       // when there are no files to upload
@@ -238,16 +241,21 @@ const onSubmit = async () => {
               updatePost
             )
           : await createOrganizationPost(organizationId, updatePost);
+
+        afterPost = postWithoutImages.data;
       } else {
         const postWithoutImages = props.post
           ? await updateMyPost(props.post.id, updatePost)
           : await createMyPost(updatePost);
+        afterPost = postWithoutImages.data;
       }
     }
     if (organizationId) {
       navigateTo("/manage/posts");
     } else {
-      navigateTo("/");
+      if (afterPost) {
+        navigateTo(getPostPath(afterPost));
+      }
     }
 
     toast({
