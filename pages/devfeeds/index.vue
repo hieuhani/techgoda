@@ -46,7 +46,9 @@
         <CarouselNext class="right-2" />
       </Carousel>
       <NewFeedPost v-if="$currentUser" />
-      <PostCard v-for="post in devfeedPosts" :post="post" :key="post.id" />
+      <div class="divide-y">
+        <PostCard v-for="post in devfeedPosts" :post="post" :key="post.id" />
+      </div>
     </div>
     <div class="col-span-12 lg:col-span-4">
       <div class="space-y-4">

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white px-4 py-4 rounded-lg">
+  <div class="px-4 py-4">
     <NuxtLink
       :to="post.author?.id ? `/user/${encodeId(post.author.id)}` : '/'"
       class="flex items-center mb-3"

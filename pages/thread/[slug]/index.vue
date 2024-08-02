@@ -1,16 +1,40 @@
 <template>
-  <Container v-if="post" class="max-w-3xl bg-white mt-2 py-6 rounded-xl">
-    <div>
-      <h1 class="text-3xl font-medium text-gray-700 mb-4">
-        {{ post.title }}
-      </h1>
-      <p class="mb-2">{{ post.metadata?.excerpt }}</p>
+  <Container v-if="post" class="max-w-3xl mt-2 py-6 rounded-xl">
+    <h1 class="text-5xl font-medium text-gray-700 mb-4">
+      {{ post.title }}
+    </h1>
 
-      <article class="prose" v-html="post.content" />
-    </div>
+    <p class="mb-6 text-xl text-gray-600">{{ post.metadata?.excerpt }}</p>
+    <NuxtLink
+      :to="post.author?.id ? `/user/${encodeId(post.author.id)}` : '/'"
+      class="flex items-center mb-4"
+    >
+      <Avatar class="h-10 w-10 text-md">
+        <AvatarImage
+          :src="
+            post.author?.metadata?.avatar?.src
+              ? post.author.metadata.avatar.src
+              : '/hi.webp'
+          "
+          alt=""
+        />
+      </Avatar>
+      <div class="ml-2">
+        <h3 class="leading-none">
+          {{ post.author?.displayName || "Anonymous" }}
+        </h3>
+        <time class="text-xs text-gray-600 leading-none">
+          {{ $dayjs(post.createdAt).fromNow() }}
+        </time>
+      </div>
+    </NuxtLink>
+    <article
+      class="prose [&>img]:w-full w-full max-w-full"
+      v-html="post.content"
+    />
     <div
       v-if="isOwner"
-      class="fixed bottom-0 left-0 right-0 bg-white shadow-md z-10 flex justify-end"
+      class="fixed bottom-0 left-0 right-0 shadow-md z-10 flex justify-end"
     >
       <NuxtLink
         :class="cn(buttonVariants({ variant: 'link' }), 'space-x-2 px-1')"
@@ -28,6 +52,7 @@ import { useGetPost } from "~/lib/publiz";
 import { cn } from "~/lib/utils";
 import { buttonVariants } from "~/components/ui/button";
 import { Pencil } from "lucide-vue-next";
+import { encodeId } from "~/lib/id";
 
 const route = useRoute();
 const idString = String(route.params.slug).split("-").pop();

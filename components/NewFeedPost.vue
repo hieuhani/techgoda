@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     to="/write?schema=devfeed"
-    class="bg-white rounded-lg px-3 py-3 block"
+    class="bg-gray-100 rounded-lg px-3 py-3 block"
   >
     <div class="flex space-x-3 mb-3">
       <Avatar class="h-10 w-10 text-md">

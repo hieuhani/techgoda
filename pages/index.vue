@@ -102,8 +102,8 @@
         </ul>
       </div>
     </div>
-    <div class="grid grid-cols-12">
-      <div class="col-span-8">
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-8">
         <div class="grid grid-cols-12 gap-6 mb-10">
           <NuxtLink
             v-for="(post, index) in next6Posts"
@@ -152,7 +152,7 @@
           </NuxtLink>
         </div>
       </div>
-      <div class="col-span-4">
+      <div class="col-span-12 lg:col-span-4">
         <ClientOnly>
           <DevfeedSideBar />
         </ClientOnly>
