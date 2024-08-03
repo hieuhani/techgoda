@@ -22,6 +22,9 @@
             <h3 class="font-medium text-lg mb-1">
               {{ featuredPosts.topPost.title }}
             </h3>
+            <p class="text-sm text-gray-500 mb-2">
+              {{ featuredPosts.topPost.metadata?.excerpt }}
+            </p>
           </NuxtLink>
         </div>
         <div v-if="featuredPosts.secondPost" class="col-span-6 lg:col-span-4">
@@ -132,7 +135,7 @@
             :to="getPostPath(post)"
             class="flex space-x-4"
           >
-            <div v-if="post.metadata?.featuredImage" class="w-48">
+            <div v-if="post.metadata?.featuredImage" class="w-44">
               <img
                 class="w-full object-cover rounded-lg aspect-[3/2]"
                 :src="
@@ -142,12 +145,32 @@
               />
             </div>
             <div class="flex-1">
-              <h3 class="line-clamp-3 font-medium">
+              <h3 class="line-clamp-3 font-medium mb-1">
                 {{ post.title }}
               </h3>
-              <p class="text-sm text-gray-600">
-                {{ $dayjs(post.createdAt).fromNow() }}
+              <p class="text-sm text-gray-500 mb-2">
+                {{ post.metadata?.excerpt }}
               </p>
+              <div class="flex items-center">
+                <Avatar class="h-8 w-8 text-md">
+                  <AvatarImage
+                    :src="
+                      post.author?.metadata?.avatar?.src
+                        ? post.author.metadata.avatar.src
+                        : '/hi.webp'
+                    "
+                    alt=""
+                  />
+                </Avatar>
+                <div class="ml-2">
+                  <h3 class="leading-none text-gray-600 text-sm">
+                    {{ post.author?.displayName || "Anonymous" }}
+                  </h3>
+                  <p class="text-xs text-gray-600">
+                    {{ $dayjs(post.createdAt).fromNow() }}
+                  </p>
+                </div>
+              </div>
             </div>
           </NuxtLink>
         </div>

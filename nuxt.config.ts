@@ -71,5 +71,3 @@ export default defineNuxtConfig({
     tags: [],
   },
 });
-
-console.log(process.env.VITE_PUBLIZ_API_URL);

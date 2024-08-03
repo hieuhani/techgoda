@@ -142,7 +142,6 @@ type GetTaxonomiesPostsQuery = {
   tag?: string;
   context?: string;
 };
-console.log(import.meta.env.VITE_PUBLIZ_API_URL);
 export const publizFetch = $fetch.create({
   baseURL: import.meta.env.VITE_PUBLIZ_API_URL,
   async onRequest(ctx) {
