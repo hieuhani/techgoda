@@ -497,3 +497,43 @@ export const createOrganizationTag = (
     }
   );
 };
+
+type CreateMetaSchemaInput = {
+  name: string;
+  schema: object;
+  target: string;
+  version: number;
+};
+
+export const createOrganizationMetaSchema = (
+  organizationId: number,
+  input: CreateMetaSchemaInput
+) => {
+  return publizFetch<BaseResponse<Taxonomy>>(
+    `api/v1/my_organizations/${organizationId}/meta_schemas`,
+    {
+      body: input,
+      method: "POST",
+    }
+  );
+};
+
+export const updateOrganizationMetaSchema = (
+  organizationId: number,
+  metaSchemaId: number,
+  input: CreateMetaSchemaInput
+) => {
+  return publizFetch<BaseResponse<Taxonomy>>(
+    `api/v1/my_organizations/${organizationId}/meta_schemas/${metaSchemaId}`,
+    {
+      body: input,
+      method: "PUT",
+    }
+  );
+};
+
+export const useGetOrganizationMetaSchemas = (organizationId: number) => {
+  return usePublizFetch<BaseResponse<MetaSchema[]>>(
+    `api/v1/my_organizations/${organizationId}/meta_schemas`
+  );
+};

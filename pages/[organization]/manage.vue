@@ -69,6 +69,10 @@ const menuItems = [
     path: "/manage/tags",
   },
   {
+    name: "Meta schemas",
+    path: "/manage/meta-schemas",
+  },
+  {
     name: "Settings",
     path: "/manage/settings",
   },
