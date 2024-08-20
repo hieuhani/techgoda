@@ -431,7 +431,7 @@ export const useGetOrganizationPosts = (
 
 export const useGetMyOrganizationPost = (
   organizationId: number,
-  id: number
+  id: string
 ) => {
   return usePublizFetch<BaseResponse<Post>>(
     `api/v1/my_organizations/${organizationId}/posts/${id}`
@@ -448,4 +448,52 @@ export const useGetUserPosts = (userId: number | string) => {
 
 export const useGetMyPosts = () => {
   return usePublizFetch<BaseResponse<Post[]>>("api/v1/my_posts");
+};
+
+type CreateTaxonomyInput = {
+  name: string;
+  slug: string;
+};
+
+export const createOrganizationTaxonomy = (
+  organizationId: number,
+  input: CreateTaxonomyInput
+) => {
+  return publizFetch<BaseResponse<Taxonomy>>(
+    `api/v1/my_organizations/${organizationId}/taxonomies`,
+    {
+      body: input,
+      method: "POST",
+    }
+  );
+};
+
+export const useGetOrganizationTaxonomies = (organizationId: number) => {
+  return usePublizFetch<BaseResponse<Taxonomy[]>>(
+    `api/v1/my_organizations/${organizationId}/taxonomies`
+  );
+};
+
+export const useGetOrganizationTags = (organizationId: number) => {
+  return usePublizFetch<BaseResponse<Tag[]>>(
+    `api/v1/my_organizations/${organizationId}/tags`
+  );
+};
+
+type CreateTagInput = {
+  name: string;
+  parentId?: number;
+};
+
+export const createOrganizationTag = (
+  organizationId: number,
+  input: CreateTagInput
+) => {
+  return publizFetch<BaseResponse<Post>>(
+    `api/v1/my_organizations/${organizationId}/tags`,
+    {
+      body: input,
+      method: "POST",
+    }
+  );
 };

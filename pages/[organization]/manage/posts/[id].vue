@@ -10,7 +10,7 @@ const organization = inject<Ref<Organization | undefined>>("organization");
 
 const { data } = useGetMyOrganizationPost(
   organization?.value?.id!!,
-  +route.params.id
+  String(route.params.id)
 );
 
 const post = computed(() => data?.value?.data);
