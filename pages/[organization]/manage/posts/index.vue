@@ -15,7 +15,12 @@
       <NuxtLink
         v-for="metaSchema in applicableOrganizationMetaSchemas"
         class="font-medium px-3 py-2 hover:bg-gray-200 rounded capitalize"
-        :to="`/manage/posts?metaSchema=${metaSchema.name}:${metaSchema.version}`"
+        :to="`/manage/posts?metaSchema=${[
+          metaSchema.organizationId ? tenant : '',
+          metaSchema.name,
+        ]
+          .filter(Boolean)
+          .join('/')}:${metaSchema.version}`"
       >
         {{ metaSchema.name }}
       </NuxtLink>
