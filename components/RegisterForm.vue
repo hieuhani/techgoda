@@ -62,8 +62,8 @@ import * as z from "zod";
 import { Github } from "lucide-vue-next";
 import { useToast } from "./ui/toast";
 import GoogleLogo from "@/components/icons/GoogleLogo.vue";
+import { firebaseAuth } from "~/lib/firebase";
 
-const auth = useFirebaseAuth()!;
 const { toast } = useToast();
 const githubProvider = new GithubAuthProvider();
 const googleProvider = new GoogleAuthProvider();
@@ -95,7 +95,11 @@ const form = useForm({
 const onSubmit = form.handleSubmit(async (values) => {
   try {
     loading.value = true;
-    await createUserWithEmailAndPassword(auth, values.email, values.password);
+    await createUserWithEmailAndPassword(
+      firebaseAuth,
+      values.email,
+      values.password
+    );
     navigateTo("/");
   } catch (e: any) {
     toast({
@@ -109,7 +113,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 const signInWithGithub = async () => {
   try {
     loading.value = true;
-    await signInWithPopup(auth, githubProvider);
+    await signInWithPopup(firebaseAuth, githubProvider);
   } catch (e: any) {
     toast({
       title: "Error",
@@ -122,7 +126,7 @@ const signInWithGithub = async () => {
 const signInWithGoogle = async () => {
   try {
     loading.value = true;
-    await signInWithPopup(auth, googleProvider);
+    await signInWithPopup(firebaseAuth, googleProvider);
   } catch (e: any) {
     toast({
       title: "Error",

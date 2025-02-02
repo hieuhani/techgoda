@@ -1,4 +1,4 @@
-import type { Auth } from "firebase/auth";
+import { firebaseAuth } from "~/lib/firebase";
 import { useGetMyOrganizations, useGetMyProfile } from "~/lib/publiz";
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -11,8 +11,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       immediate: false,
     });
 
-  const auth = nuxtApp.$firebaseAuth as Auth;
-  auth.onAuthStateChanged(() => {
+  firebaseAuth.onAuthStateChanged(() => {
     refreshGetMyProfile();
     refreshGetMyOrganizations();
   });

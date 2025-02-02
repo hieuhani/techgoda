@@ -74,6 +74,7 @@ import {
 import type { MyOrganization, User } from "~/lib/publiz";
 import { useBuildTenantUrl } from "~/lib/utils";
 import { encodeId } from "~/lib/id";
+import { firebaseAuth } from "~/lib/firebase";
 
 interface Props {
   user: User;
@@ -82,9 +83,8 @@ interface Props {
 const { $refreshGetMyProfile } = useNuxtApp();
 
 const props = defineProps<Props>();
-const auth = useFirebaseAuth()!;
 const onLogOut = async () => {
-  await signOut(auth);
+  await signOut(firebaseAuth);
   if (typeof $refreshGetMyProfile === "function") {
     $refreshGetMyProfile({
       cache: "no-cache",

@@ -2,6 +2,7 @@ import { defu } from "defu";
 import type { UseFetchOptions } from "nuxt/app";
 import { slugify } from "./slugify";
 import { encodeId } from "./id";
+import { firebaseAuth } from "./firebase";
 
 export type BaseResponse<T> = {
   data: T;
@@ -145,14 +146,10 @@ type GetTaxonomiesPostsQuery = {
 export const publizFetch = $fetch.create({
   baseURL: import.meta.env.VITE_PUBLIZ_API_URL,
   async onRequest(ctx) {
-    const currentUser = await getCurrentUser();
-    const token = await currentUser?.getIdToken();
+    const token = await firebaseAuth.currentUser?.getIdToken();
 
     if (token) {
-      ctx.options.headers = {
-        ...ctx.options.headers,
-        Authorization: `Bearer ${token}`,
-      };
+      ctx.options.headers.append("Authorization", `Bearer ${token}`);
     }
   },
 });
@@ -165,14 +162,10 @@ export function usePublizFetch<T>(
   const defaults: UseFetchOptions<T> = {
     baseURL: runtimeConfig.public.publizApiUrl,
     async onRequest(ctx) {
-      const currentUser = await getCurrentUser();
-      const token = await currentUser?.getIdToken();
+      const token = await firebaseAuth.currentUser?.getIdToken();
 
       if (token) {
-        ctx.options.headers = {
-          ...ctx.options.headers,
-          Authorization: `Bearer ${token}`,
-        };
+        ctx.options.headers.append("Authorization", `Bearer ${token}`);
       }
     },
   };
